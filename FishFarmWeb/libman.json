@@ -1,0 +1,22 @@
+{
+  "version": "1.0",
+  "defaultProvider": "cdnjs",
+  "libraries": [
+    {
+      "library": "twitter-bootstrap@4.5.2",
+      "destination": "wwwroot/twitter-bootstrap/"
+    },
+    {
+      "library": "jquery@3.5.1",
+      "destination": "wwwroot/jquery/"
+    },
+    {
+      "library": "popper.js@2.4.4",
+      "destination": "wwwroot/popper.js/"
+    },
+    {
+      "library": "font-awesome@5.14.0",
+      "destination": "wwwroot/font-awesome/"
+    }
+  ]
+}

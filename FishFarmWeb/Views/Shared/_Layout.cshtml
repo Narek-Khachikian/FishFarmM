@@ -1,0 +1,87 @@
+﻿@inject IViewLocalizer _localizer
+@inject SupportedCultures _cultures
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <link href="~/fish_animal_5829.ico" type="image/x-icon" rel="icon" />
+    <link rel="stylesheet"
+          asp-fallback-href-include="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/css/bootstrap.min.css"
+          asp-fallback-test-class="btn"
+          asp-fallback-test-property="display"
+          asp-fallback-test-value="inline-block"
+          asp-fallback-href="~/twitter-bootstrap/css/bootstrap.min.css" />
+    <link rel="stylesheet"
+          asp-href-include="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
+          asp-fallback-test-class="fa-pull-right"
+          asp-fallback-test-property="float"
+          asp-fallback-test-value="right"
+          asp-fallback-href="~/font-awesome/css/all.min.css" />
+
+    <script asp-src-include="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            asp-fallback-src="~/twitter-bootstrap/js/bootstrap.min.js" type="text/javascript">
+    </script>
+    <script src="~/popper.js/cjs/popper.min.js"></script>
+    <script src="~/jquery/jquery.min.js"></script>
+    
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="#">Logo</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">@_localizer["Home"] <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">@_localizer["Link"]</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link disabled" href="#">@_localizer["Disabled"]</a>
+                    </li>
+                </ul>
+
+                <a class="fa-2x fas fa-cog m-1" asp-controller="Settings" asp-action="Index"></a>
+                &ensp;
+                @foreach (var pair in _cultures.SupportedCulture)
+                {
+                    <a asp-controller="Home" asp-action="SelectLanguage"
+                       asp-route-cur="@(string.IsNullOrEmpty(Context.Request.Path)?"~/": Context.Request.Path.Value)"
+                       asp-route-cult=@pair.Key
+                       class="m-1">@pair.Value</a>
+                    <span>&ensp;</span>
+                }
+                <form class="form-inline my-2 my-lg-0">
+
+                    <input class="form-control mr-sm-2" disabled type="search" placeholder="@_localizer["Search"]">
+                    <button class="btn btn-outline-success my-2 my-sm-0" disabled type="submit">@_localizer["Search"]</button>
+                </form>
+            </div>
+        </nav>
+    </header>
+    <div>
+        @RenderBody()
+    </div>
+
+
+    <!--JavaScripts-->
+    <script asp-src-include="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"
+            asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+            asp-fallback-src="~/twitter-bootstrap/js/bootstrap.min.js" type="text/javascript">
+    </script>
+    <script src="~/popper.js/cjs/popper.min.js"></script>
+    <script src="~/jquery/jquery.min.js"></script>
+
+
+</body>
+</html>
