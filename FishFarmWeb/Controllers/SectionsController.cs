@@ -50,8 +50,6 @@ namespace FishFarmWeb.Controllers
                 }
                 else
                 {
-                    model.CreationDate = DateTime.Now;
-                    model.LastModificationDate = model.CreationDate;
                     model.LastModifiedByName = User.Identity.Name;
                     int result = await _repository.AddSectionAsync(model);
                     if (result < 1)
@@ -63,6 +61,73 @@ namespace FishFarmWeb.Controllers
                 }
             }
             return View(model);
+        }
+
+
+        public async Task<IActionResult> EditSection(long id)
+        {
+            Section model = await _repository.GetSectionByIdAsync(id);
+            if(model != null)
+            {
+                return View(model);
+            }
+            TempData["SectionMessage"] = _stringLocalizer["Selected section was missing"].ToString();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        [HttpPost,AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> EditSection(Section model)
+        {
+            if (ModelState.IsValid)
+            {
+                model.LastModifiedByName = User.Identity.Name;
+                int result = await _repository.UpdateSectionAsync(model);
+                if(result == -5)
+                {
+                    TempData["SectionMessage"] = _stringLocalizer["Nothing changed"].ToString();
+                    
+                }
+                else if(result == 1)
+                {
+                    TempData["SectionMessage"] = _stringLocalizer["Section modified successfully"].ToString();
+                    
+                }
+                return RedirectToAction(nameof(Index));
+            }
+            return View(model);
+        }
+
+
+        public async Task<IActionResult> DeleteSection(long id)
+        {
+            Section model = await _repository.GetSectionByIdAsync(id);
+            if (model != null)
+            {
+                return View(model);
+            }
+            TempData["SectionMessage"] = _stringLocalizer["Selected section was missing"].ToString();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        [HttpPost,AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> DeleteSection([FromForm] long id, bool a = true)
+        {
+            if (ModelState.IsValid)
+            {
+                int result = await _repository.DeleteSectionAsync(id);
+                if(result == -5)
+                {
+                    TempData["SectionMessage"] = _stringLocalizer["Nothing deleted"].ToString();
+                    
+                }
+                else if(result == 1)
+                {
+                    TempData["SectionMessage"] = _stringLocalizer["Section Deleted successfully"].ToString();
+                }
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }

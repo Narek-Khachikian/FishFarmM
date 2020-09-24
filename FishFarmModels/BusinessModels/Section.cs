@@ -9,6 +9,7 @@ namespace FishFarm.Models
     public class Section : BaseModel
     {
         [Required]
+        [StringLength(64,MinimumLength =3)]
         public string Name { get; set; }
 
 

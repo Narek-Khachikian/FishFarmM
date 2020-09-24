@@ -2,7 +2,7 @@
 @model Section
 
 @{
-    ViewData["Title"] = "CreateSection";
+    ViewData["Title"] = "Create Section";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
@@ -25,7 +25,7 @@
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="Create" class="btn btn-primary" />
+                            <input type="submit" value="@_localizer["Create"]" class="btn btn-primary" />
                         </div>
                     </form>
                 </div>

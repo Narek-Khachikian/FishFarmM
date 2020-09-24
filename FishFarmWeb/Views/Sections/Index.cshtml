@@ -40,6 +40,7 @@
                             </td>
                             <td class="col-3">
                                 <a asp-controller="Sections" asp-action="EditSection" asp-route-id="@item.Id" class="btn btn-warning">@_localizer["Edit"]</a>
+                                <a asp-controller="Sections" asp-action="DeleteSection" asp-route-id="@item.Id" class="btn btn-danger">@_localizer["Delete"]</a>
                             </td>
                             <td class="col-3">
                                 <span></span>

@@ -1,6 +1,7 @@
 ﻿using FishFarm.Data;
 using FishFarm.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,8 @@ namespace FishFarm.Services
 
         public async Task<int> AddSectionAsync(Section model)
         {
+            model.CreationDate = DateTime.UtcNow;
+            model.LastModificationDate = model.CreationDate;
             _dbContext.Sections.Add(model);
             return await _dbContext.SaveChangesAsync();
         }
@@ -36,7 +39,50 @@ namespace FishFarm.Services
 
         public async Task<IEnumerable<Section>> GetSectionsAsync()
         {
-            return await _dbContext.Sections.ToListAsync();
+            IEnumerable<Section> result = await _dbContext.Sections.ToListAsync();
+            return result;
+        }
+
+        public async Task<Section> GetSectionByIdAsync(long id)
+        {
+            Section result = await _dbContext.Sections.FindAsync(id);
+            return result;
+        }
+
+
+        /// <summary>
+        /// Updates the section entity if modified.
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Returnes -5 if nothing changed, otherwise returns savechangeasync value</returns>
+        public async Task<int> UpdateSectionAsync(Section model)
+        {
+            Section tempData = await GetSectionByIdAsync(model.Id);
+            if(tempData.Name != model.Name)
+            {
+                tempData.Name = model.Name;
+                tempData.LastModificationDate = DateTime.UtcNow;
+                _dbContext.Sections.Update(tempData);
+                return await _dbContext.SaveChangesAsync();
+            }
+            return -5;
+        }
+
+
+        /// <summary>
+        /// Deletes the section entity
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Returnes -5 id not found to delete, otherwise returnes savechangeasync value</returns>
+        public async Task<int> DeleteSectionAsync(long id)
+        {
+            Section tempModel = await _dbContext.Sections.FindAsync(id);
+            if(tempModel != null)
+            {
+                _dbContext.Remove<Section>(tempModel);
+                return await _dbContext.SaveChangesAsync();
+            }
+            return -5;
         }
     }
 }

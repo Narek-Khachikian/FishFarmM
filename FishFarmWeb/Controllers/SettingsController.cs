@@ -19,17 +19,12 @@ namespace FishFarmWeb.Controllers
         {
             _repository = repo;
             _stringLocalizer = stringLocalizer;
-
         }
+
 
         public IActionResult Index()
         {
-
             return View();
         }
-
-
-        
-
     }
 }
