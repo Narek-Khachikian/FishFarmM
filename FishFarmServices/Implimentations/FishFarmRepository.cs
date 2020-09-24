@@ -27,11 +27,16 @@ namespace FishFarm.Services
         public async Task<bool> SectionExistsAsync(string name)
         {
             bool result = false;
-            if(await _dbContext.Sections.Where(s=>s.Name == name).AnyAsync())
+            if(await _dbContext.Sections.Where(s=>s.Name.ToUpper() == name.ToUpper()).AnyAsync())
             {
                 result = true;
             }
             return result;
+        }
+
+        public async Task<IEnumerable<Section>> GetSectionsAsync()
+        {
+            return await _dbContext.Sections.ToListAsync();
         }
     }
 }

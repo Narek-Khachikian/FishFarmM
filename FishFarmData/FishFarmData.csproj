@@ -9,6 +9,14 @@
     <Compile Remove="Migrations\20200920210917_CreateInitial.Designer.cs" />
     <Compile Remove="Migrations\20200923100058_Test.cs" />
     <Compile Remove="Migrations\20200923100058_Test.Designer.cs" />
+    <Compile Remove="Migrations\20200923102236_CreateInitial.cs" />
+    <Compile Remove="Migrations\20200923102236_CreateInitial.Designer.cs" />
+    <Compile Remove="Migrations\20200924074152_StatusAdded.cs" />
+    <Compile Remove="Migrations\20200924074152_StatusAdded.Designer.cs" />
+    <Compile Remove="Migrations\20200924075039_StatusAdded.cs" />
+    <Compile Remove="Migrations\20200924075039_StatusAdded.Designer.cs" />
+    <Compile Remove="Migrations\20200924075332_StatusAdded.cs" />
+    <Compile Remove="Migrations\20200924075332_StatusAdded.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

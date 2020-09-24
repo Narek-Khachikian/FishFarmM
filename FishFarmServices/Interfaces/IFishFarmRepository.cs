@@ -10,6 +10,8 @@ namespace FishFarm.Services
     {
         Task<bool> SectionExistsAsync(string name);
         Task<int> AddSectionAsync(Section model);
-        
+        Task<IEnumerable<Section>> GetSectionsAsync();
+
+
     }
 }

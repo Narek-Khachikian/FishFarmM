@@ -5,30 +5,34 @@
     <table class="table">
         <tr class="d-flex">
             <td class="table- col-2">
-
             </td>
             <td class="col-8">
                 <table class="table table-bordered">
                     <tr class="d-flex">
                         <th class="col-3">
-                            @_localizer["Topics"]
+                            @_localizer["Sobject"]
                         </th>
-                        <th class="col-9">
+                        <th class="col-5">
                             @_localizer["Options"]
+                        </th>
+                        <th class="col-4">
+                            @_localizer["Messages"]
                         </th>
                     </tr>
                     <tr class="d-flex">
                         <td class="col-3">
-                            @_localizer["Sections"]
+                            <a asp-controller="Sections" asp-action="Index" class="btn btn-light">@_localizer["Sections"]</a>
                         </td>
-                        <td class="col-9">
-                            <a asp-action="CreateSection" class="btn btn-primary">@_localizer["Create"]</a>
+                        <td class="col-5">
+                            <span>Info</span>
+                        </td>
+                        <td class="col-4">
+                            <span>Info</span>
                         </td>
                     </tr>
                 </table>
             </td>
             <td class="col-2">
-
             </td>
         </tr>
     </table>
