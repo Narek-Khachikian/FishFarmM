@@ -120,8 +120,23 @@
   <data name="A section with that name already exists" xml:space="preserve">
     <value>A section with that name already exists</value>
   </data>
+  <data name="Create Section" xml:space="preserve">
+    <value>Create Section</value>
+  </data>
+  <data name="Delete Section" xml:space="preserve">
+    <value>Delete Section</value>
+  </data>
+  <data name="Details" xml:space="preserve">
+    <value>Details</value>
+  </data>
+  <data name="Edit Section" xml:space="preserve">
+    <value>Edit Section</value>
+  </data>
   <data name="Failed to create" xml:space="preserve">
     <value>Failed to create</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
   </data>
   <data name="Nothing changed" xml:space="preserve">
     <value>Nothing changed</value>
@@ -138,7 +153,16 @@
   <data name="Section modified successfully" xml:space="preserve">
     <value>Section modified successfully</value>
   </data>
-  <data name="Selected section was missing" xml:space="preserve">
-    <value>Selected section was missing</value>
+  <data name="Sections" xml:space="preserve">
+    <value>Sections</value>
+  </data>
+  <data name="Selected section is missing" xml:space="preserve">
+    <value>Selected section is missing</value>
+  </data>
+  <data name="Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="Tanks" xml:space="preserve">
+    <value>Tanks</value>
   </data>
 </root>

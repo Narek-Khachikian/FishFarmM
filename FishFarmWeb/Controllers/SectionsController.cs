@@ -29,12 +29,14 @@ namespace FishFarmWeb.Controllers
             {
                 Sections = await _repository.GetSectionsAsync()
             };
+            ViewBag.Title = _stringLocalizer["Sections"].ToString();
             return View(model);
         }
 
 
         public IActionResult CreateSection()
         {
+            ViewBag.Title = _stringLocalizer["Create Section"].ToString();
             return View();
         }
 
@@ -60,6 +62,7 @@ namespace FishFarmWeb.Controllers
                     return RedirectToAction(nameof(Index));
                 }
             }
+            ViewBag.Title = _stringLocalizer["Create Section"].ToString();
             return View(model);
         }
 
@@ -69,6 +72,7 @@ namespace FishFarmWeb.Controllers
             Section model = await _repository.GetSectionByIdAsync(id);
             if(model != null)
             {
+                ViewBag.Title = _stringLocalizer["Edit Section"].ToString();
                 return View(model);
             }
             TempData["SectionMessage"] = _stringLocalizer["Selected section was missing"].ToString();
@@ -95,6 +99,7 @@ namespace FishFarmWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewBag.Title = _stringLocalizer["Edit Section"].ToString();
             return View(model);
         }
 
@@ -104,9 +109,10 @@ namespace FishFarmWeb.Controllers
             Section model = await _repository.GetSectionByIdAsync(id);
             if (model != null)
             {
+                ViewBag.Title = _stringLocalizer["Delete Section"].ToString();
                 return View(model);
             }
-            TempData["SectionMessage"] = _stringLocalizer["Selected section was missing"].ToString();
+            TempData["SectionMessage"] = _stringLocalizer["Selected section is missing"].ToString();
             return RedirectToAction(nameof(Index));
         }
 
@@ -127,6 +133,19 @@ namespace FishFarmWeb.Controllers
                     TempData["SectionMessage"] = _stringLocalizer["Section Deleted successfully"].ToString();
                 }
             }
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        public async Task<IActionResult> DetailSection(long id, long dd = 0)
+        {
+            Section model = await _repository.GetSectionByIdAsync(id);
+            if(model != null)
+            {
+                ViewBag.Title = _stringLocalizer["Details"].ToString();
+                return View(model);
+            }
+            TempData["SectionMessage"] = _stringLocalizer["Selected section is missing"].ToString();
             return RedirectToAction(nameof(Index));
         }
     }

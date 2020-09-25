@@ -129,4 +129,7 @@
   <data name="Sobject" xml:space="preserve">
     <value>Sobject</value>
   </data>
+  <data name="Tanks" xml:space="preserve">
+    <value>Tanks</value>
+  </data>
 </root>

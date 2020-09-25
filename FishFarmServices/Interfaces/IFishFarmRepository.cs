@@ -8,6 +8,8 @@ namespace FishFarm.Services
 {
     public interface IFishFarmRepository
     {
+
+        #region Sections
         Task<bool> SectionExistsAsync(string name);
         Task<int> AddSectionAsync(Section model);
         Task<IEnumerable<Section>> GetSectionsAsync();
@@ -28,5 +30,14 @@ namespace FishFarm.Services
         /// <returns>Returnes -5 id not found to delete, otherwise returnes savechangeasync value</returns>
         Task<int> DeleteSectionAsync(long id);
 
+        #endregion
+
+
+        #region Tanks
+
+        Task<IEnumerable<Tank>> GetAllTanksAsync();
+
+
+        #endregion
     }
 }

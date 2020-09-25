@@ -19,6 +19,10 @@ namespace FishFarm.Services
             _dbContext = dbContext;
         }
 
+
+        #region Sections
+
+
         public async Task<int> AddSectionAsync(Section model)
         {
             model.CreationDate = DateTime.UtcNow;
@@ -84,5 +88,22 @@ namespace FishFarm.Services
             }
             return -5;
         }
+
+
+        #endregion
+
+
+        #region Tanks
+
+        public async Task<IEnumerable<Tank>> GetAllTanksAsync()
+        {
+            IEnumerable<Tank> result = await _dbContext.Tanks.Include(t=>t.Section).OrderBy(t=>t.Section.Name).ToListAsync();
+            return result;
+        }
+
+
+
+        #endregion
+
     }
 }

@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using FishFarmWeb.SharedResources;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Localization;
 
 namespace FishFarmWeb.Controllers
 {
@@ -13,16 +14,18 @@ namespace FishFarmWeb.Controllers
     {
 
         private readonly SupportedCultures _cultures;
+        private readonly IStringLocalizer<SharedResource> _stringLocalizer;
 
-        public HomeController(SupportedCultures cults)
+        public HomeController(SupportedCultures cults, IStringLocalizer<SharedResource> stringLocalizer)
         {
             _cultures = cults;
+            _stringLocalizer = stringLocalizer;
         }
 
         
         public IActionResult Index()
         {
-            ViewBag.Title = "Home";
+            ViewBag.Title =_stringLocalizer["Home"].ToString();
             return View();
         }
 
@@ -37,6 +40,5 @@ namespace FishFarmWeb.Controllers
             }
             return LocalRedirect(cur);
         }
-
     }
 }

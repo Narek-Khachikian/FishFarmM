@@ -1,11 +1,11 @@
 ﻿@inject IViewLocalizer _localizer
-@model SectionIndexViewModel
+@model TankIndexViewModel
 
 <div class="container">
-    <h1>@_localizer["All Sections"]</h1>
+    <h1>@_localizer["All Tanks"]</h1>
 </div>
 
-<a asp-controller="Sections" asp-action="CreateSection" class="btn btn-primary">@_localizer["Create New"]</a>
+<a asp-controller="Tanks" asp-action="CreateTank" class="btn btn-primary">@_localizer["Create New"]</a>
 @TempData["SectionMessage"]
 <div>
     <table class="table">
@@ -15,11 +15,14 @@
             <td class="col-8">
                 <table class="table table-bordered">
                     <tr class="d-flex">
-                        <th class="col-2">
+                        <th class="col-1">
                             @_localizer["Id"]
                         </th>
-                        <th class="col-4">
+                        <th class="col-2">
                             @_localizer["Name"]
+                        </th>
+                        <th class="col-3">
+                            @_localizer["Section"]
                         </th>
                         <th class="col-3">
                             @_localizer["Options"]
@@ -29,19 +32,22 @@
                         </th>
                     </tr>
 
-                    @foreach (Section item in Model.Sections)
+                    @foreach (Tank item in Model.Tanks)
                     {
                         <tr class="d-flex">
-                            <td class="col-2">
+                            <td class="col-1">
                                 @item.Id
                             </td>
-                            <td class="col-4">
+                            <td class="col-2">
                                 @item.Name
                             </td>
                             <td class="col-3">
-                                <a asp-controller="Sections" asp-action="EditSection" asp-route-id="@item.Id" class="btn btn-warning">@_localizer["Edit"]</a>
-                                <a asp-controller="Sections" asp-action="DeleteSection" asp-route-id="@item.Id" class="btn btn-danger">@_localizer["Delete"]</a>
-                                <a asp-controller="Sections" asp-action="DetailSection" asp-route-id="@item.Id" class="btn btn-secondary">@_localizer["Details"]</a>
+                                @item.Section.Name
+                            </td>
+                            <td class="col-3">
+                                <a asp-controller="Tanks" asp-action="EditTank" asp-route-id="@item.Id" class="btn btn-warning">@_localizer["Edit"]</a>
+                                <a asp-controller="Tanks" asp-action="DeleteTank" asp-route-id="@item.Id" class="btn btn-danger">@_localizer["Delete"]</a>
+                                <a asp-controller="Tanks" asp-action="DetailTank" asp-route-id="@item.Id" class="btn btn-secondary">@_localizer["Details"]</a>
                             </td>
                             <td class="col-3">
                                 <span></span>

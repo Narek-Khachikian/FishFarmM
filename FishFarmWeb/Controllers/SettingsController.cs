@@ -24,6 +24,7 @@ namespace FishFarmWeb.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Title = _stringLocalizer["Settings"].ToString();
             return View();
         }
     }
