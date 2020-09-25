@@ -1,13 +1,15 @@
 ﻿using FishFarm.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Text;
 
 namespace FishFarm.Models
 {
     public class Tank : BaseModel
     {
-
+        [Required]
+        [StringLength(64,MinimumLength =3)]
         public string Name { get; set; }
         public double Lenght { get; set; }//in m
         public double Width { get; set; }//in m

@@ -117,31 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="All Tanks" xml:space="preserve">
-    <value>All Tanks</value>
+  <data name="-- Select a Section --" xml:space="preserve">
+    <value>-- Select a Section --</value>
   </data>
-  <data name="Create New" xml:space="preserve">
-    <value>Create New</value>
+  <data name="-- Select a Tank Shape --" xml:space="preserve">
+    <value>-- Select a Tank Shape --</value>
   </data>
-  <data name="Delete" xml:space="preserve">
-    <value>Delete</value>
+  <data name="Create Tank" xml:space="preserve">
+    <value>Create Tank</value>
   </data>
-  <data name="Edit" xml:space="preserve">
-    <value>Edit</value>
+  <data name="[m]" xml:space="preserve">
+    <value>[m]</value>
   </data>
-  <data name="Id" xml:space="preserve">
-    <value>Id</value>
+  <data name="[m^2]" xml:space="preserve">
+    <value>[m^2]</value>
   </data>
-  <data name="Message" xml:space="preserve">
-    <value>Message</value>
-  </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
-  </data>
-  <data name="Options" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="Section" xml:space="preserve">
-    <value>Section</value>
+  <data name="[m^3]" xml:space="preserve">
+    <value>[m^3]</value>
   </data>
 </root>

@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using FishFarmWeb.SharedResources;
 
 namespace FishFarmWeb.Controllers
 {
@@ -58,7 +59,10 @@ namespace FishFarmWeb.Controllers
                     {
                         TempData["SectionMessage"] = _stringLocalizer["Failed to create"].ToString();
                     }
-                    TempData["SectionMessage"] = _stringLocalizer["Section created successfully"].ToString();
+                    else
+                    {
+                        TempData["SectionMessage"] = _stringLocalizer["Section created successfully"].ToString();
+                    }
                     return RedirectToAction(nameof(Index));
                 }
             }

@@ -22,7 +22,6 @@ namespace FishFarm.Services
         /// <returns>Returnes -5 if nothing changed, otherwise returns savechangeasync value</returns>
         Task<int> UpdateSectionAsync(Section model);
 
-
         /// <summary>
         /// Deletes the section entity
         /// </summary>
@@ -35,7 +34,12 @@ namespace FishFarm.Services
 
         #region Tanks
 
+
         Task<IEnumerable<Tank>> GetAllTanksAsync();
+
+        Task<bool> TankNameExistsAsync(string name);
+
+        Task<int> AddTankAsync(Tank model);
 
 
         #endregion

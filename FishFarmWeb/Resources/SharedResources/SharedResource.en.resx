@@ -120,8 +120,18 @@
   <data name="A section with that name already exists" xml:space="preserve">
     <value>A section with that name already exists</value>
   </data>
+  <data name="A tank with that name already exists" xml:space="preserve">
+    <value>A tank with that name already exists</value>
+  </data>
+  <data name="Circular" xml:space="preserve">
+    <value>Circular</value>
+    <comment>TankShape Enum</comment>
+  </data>
   <data name="Create Section" xml:space="preserve">
     <value>Create Section</value>
+  </data>
+  <data name="Create Tank" xml:space="preserve">
+    <value>Create Tank</value>
   </data>
   <data name="Delete Section" xml:space="preserve">
     <value>Delete Section</value>
@@ -144,6 +154,14 @@
   <data name="Nothing deleted" xml:space="preserve">
     <value>Nothing deleted</value>
   </data>
+  <data name="Oval" xml:space="preserve">
+    <value>Oval</value>
+    <comment>TankShape Enum</comment>
+  </data>
+  <data name="Rectangle" xml:space="preserve">
+    <value>Rectangle</value>
+    <comment>TankShape Enum</comment>
+  </data>
   <data name="Section created successfully" xml:space="preserve">
     <value>Section created successfully</value>
   </data>
@@ -162,7 +180,18 @@
   <data name="Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="Square" xml:space="preserve">
+    <value>Square</value>
+    <comment>TankShape Enum</comment>
+  </data>
+  <data name="Tank created successfully" xml:space="preserve">
+    <value>Tank created successfully</value>
+  </data>
   <data name="Tanks" xml:space="preserve">
     <value>Tanks</value>
+  </data>
+  <data name="UnKnown" xml:space="preserve">
+    <value>Un-Known</value>
+    <comment>TankShape Enum</comment>
   </data>
 </root>

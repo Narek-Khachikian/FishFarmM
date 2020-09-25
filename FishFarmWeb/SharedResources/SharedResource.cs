@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace FishFarmWeb
+namespace FishFarmWeb.SharedResources
 {
     public class SharedResource
     {
+
     }
 }

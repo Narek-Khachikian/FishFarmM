@@ -25,4 +25,10 @@
     <Folder Include="wwwroot\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\SharedResources\SharedResource.en.resx">
+      <Generator></Generator>
+    </EmbeddedResource>
+  </ItemGroup>
+
 </Project>

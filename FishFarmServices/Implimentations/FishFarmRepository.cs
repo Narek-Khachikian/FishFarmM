@@ -27,7 +27,7 @@ namespace FishFarm.Services
         {
             model.CreationDate = DateTime.UtcNow;
             model.LastModificationDate = model.CreationDate;
-            _dbContext.Sections.Add(model);
+            await _dbContext.Sections.AddAsync(model);
             return await _dbContext.SaveChangesAsync();
         }
 
@@ -101,7 +101,19 @@ namespace FishFarm.Services
             return result;
         }
 
+        public async Task<bool> TankNameExistsAsync(string name)
+        {
+            bool result = await _dbContext.Tanks.Where(t => t.Name.ToUpper() == name.ToUpper()).AnyAsync();
+            return result;
+        }
 
+        public async Task<int> AddTankAsync(Tank model)
+        {
+            model.CreationDate = DateTime.UtcNow;
+            model.LastModificationDate = model.CreationDate;
+            await _dbContext.Tanks.AddAsync(model);
+            return await _dbContext.SaveChangesAsync();
+        }
 
         #endregion
 
