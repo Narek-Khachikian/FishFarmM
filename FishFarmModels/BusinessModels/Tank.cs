@@ -22,6 +22,7 @@ namespace FishFarm.Models
         public long SectionId { get; set; }
         public Section Section { get; set; }
 
+
         public IEnumerable<In> Ins { get; set; }
         public IEnumerable<Out> Outs { get; set; }
 

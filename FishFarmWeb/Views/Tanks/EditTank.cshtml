@@ -6,7 +6,7 @@
 }
 
 <div class="container">
-    <h1>@_localizer["Create Tank"]</h1>
+    <h1>@_localizer["Edit Tank"]</h1>
 </div>
 
 
@@ -16,8 +16,13 @@
         <td class="col-8">
             <div class="row">
                 <div class="col-md-4">
-                    <form asp-action="CreateTank" method="post">
+                    <form asp-action="EditTank" method="post">
                         <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Tank.Id" class="control-label"></label>
+                            <input disabled asp-for="Tank.Id" class="form-control" />
+                            <input hidden asp-for="Tank.Id" class="form-control" />
+                        </div>
                         <div class="form-group">
                             <label asp-for="Tank.Name" class="control-label"></label>
                             <input asp-for="Tank.Name" class="form-control" />
@@ -56,15 +61,15 @@
                         <div class="form-group">
                             <label asp-for="Tank.Shape" class="control-label"></label>
                             <select asp-for="Tank.Shape" asp-items="Html.GetEnumSelectList<TankShape>()" class="form-control">
-                                <option selected hidden value="">@_localizer["-- Select a Tank Shape --"]</option>
+                                <option hidden selected value="@Model.Tank.Shape">@Enum.GetName(typeof(TankShape), Model.Tank.Shape)</option>
                             </select>
                             <span asp-validation-for="Tank.Shape" class="text-danger"></span>
                         </div>
                         <div class="form-group">
                             <label asp-for="Tank.Section" class="control-label"></label>
                             <select asp-for="Tank.SectionId" class="form-control">
-                                <option selected hidden value="">@_localizer["-- Select a Section --"]</option>
-                                @foreach(Section item in Model.Sections)
+                                <option hidden selected value="@Model.Tank.SectionId">@Model.Sections.Where(s => s.Id == Model.Tank.SectionId).FirstOrDefault().Name</option>
+                                @foreach (Section item in Model.Sections)
                                 {
                                     <option value="@item.Id">@item.Name</option>
                                 }
@@ -72,7 +77,7 @@
                             <span asp-validation-for="Tank.SectionId" class="text-danger"></span>
                         </div>
                         <div class="form-group">
-                            <input type="submit" value="@_localizer["Create"]" class="btn btn-primary" />
+                            <input type="submit" value="@_localizer["Edit"]" class="btn btn-warning" />
                         </div>
                     </form>
                 </div>

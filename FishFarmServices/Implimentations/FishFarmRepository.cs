@@ -115,6 +115,71 @@ namespace FishFarm.Services
             return await _dbContext.SaveChangesAsync();
         }
 
+        public async Task<Tank> GetTankByIdAsync(long id)
+        {
+            Tank tank = await _dbContext.Tanks.FindAsync(id);
+            return tank;
+        }
+
+
+        /// <summary>
+        /// Updates the Tank entity if modified
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Return -5 if nothing changed, otherwise returns savechange result</returns>
+        public async Task<int> UpdateTankAsync(Tank model)
+        {
+            if(model != null)
+            {
+                Tank tempModel = await GetTankByIdAsync(model.Id);
+                if (tempModel == null)
+                {
+                    return -5;
+                }
+                if (tempModel.Depth != model.Depth
+                    || tempModel.Lenght != model.Lenght
+                    || tempModel.Name != model.Name
+                    || tempModel.SectionId != model.SectionId
+                    || tempModel.Shape != model.Shape
+                    || tempModel.SurfaceArea != model.SurfaceArea
+                    || tempModel.Volume != model.Volume
+                    || tempModel.Width != model.Width)
+                {
+                    tempModel.Depth = model.Depth;
+                    tempModel.Lenght = model.Lenght;
+                    tempModel.Name = model.Name;
+                    tempModel.SectionId = model.SectionId;
+                    tempModel.Shape = model.Shape;
+                    tempModel.SurfaceArea = model.SurfaceArea;
+                    tempModel.Volume = model.Volume;
+                    tempModel.Width = model.Width;
+                    tempModel.LastModificationDate = DateTime.UtcNow;
+                    _dbContext.Tanks.Update(tempModel);
+                    int result = await _dbContext.SaveChangesAsync();
+                    return result;
+                }
+            }
+            return -5;
+        }
+
+
+        /// <summary>
+        /// Deletes the Tank entity
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Returns -5 if tank not found, otherwise returns savechange result</returns>
+        public async Task<int> DeleteTankAsync(long id)
+        {
+            Tank model = await GetTankByIdAsync(id);
+            int result = -5;
+            if(model != null)
+            {
+                _dbContext.Tanks.Remove(model);
+                result = await _dbContext.SaveChangesAsync();
+            }
+            return result;
+        }
+
         #endregion
 
     }

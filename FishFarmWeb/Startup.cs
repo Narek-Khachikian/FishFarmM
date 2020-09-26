@@ -11,6 +11,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using FishFarm.Services;
+using static FishFarm.Services.FishFarmSupportedCulturesExtention;
 using FishFarmWeb.SharedResources;
 
 
@@ -40,12 +41,13 @@ namespace FishFarmWeb
             });
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.FishFarmRepository();
-            services.AddSingleton<SupportedCultures>();
+            services.SupportedCultures();
+            //services.AddSingleton<SupportedCultures>();
         }
 
         
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, SupportedCultures suportedCultures)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,FishFarm.Services.SupportedCultures suportedCultures)
         {
             if (env.IsDevelopment())
             {

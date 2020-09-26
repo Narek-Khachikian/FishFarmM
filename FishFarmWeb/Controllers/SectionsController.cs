@@ -122,7 +122,7 @@ namespace FishFarmWeb.Controllers
 
 
         [HttpPost,AutoValidateAntiforgeryToken]
-        public async Task<IActionResult> DeleteSection([FromForm] long id, bool a = true)
+        public async Task<IActionResult> DeleteSectionConfirmed(long id)
         {
             if (ModelState.IsValid)
             {
@@ -141,7 +141,7 @@ namespace FishFarmWeb.Controllers
         }
 
 
-        public async Task<IActionResult> DetailSection(long id, long dd = 0)
+        public async Task<IActionResult> DetailSection(long id)
         {
             Section model = await _repository.GetSectionByIdAsync(id);
             if(model != null)

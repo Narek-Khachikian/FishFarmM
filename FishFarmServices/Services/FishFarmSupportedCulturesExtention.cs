@@ -1,10 +1,9 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace FishFarmWeb.SharedResources
+namespace FishFarm.Services
 {
     public class SupportedCultures
     {
@@ -13,6 +12,15 @@ namespace FishFarmWeb.SharedResources
         {
             SupportedCulture.Add("en", "Eng");
             SupportedCulture.Add("hy", "Հայ");
+        }
+    }
+
+    public static class FishFarmSupportedCulturesExtention
+    {
+        public static IServiceCollection SupportedCultures(this IServiceCollection app)
+        {
+            app.AddSingleton<SupportedCultures>();
+            return app;
         }
     }
 }

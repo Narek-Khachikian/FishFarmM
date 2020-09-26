@@ -7,6 +7,7 @@ using FishFarmWeb.SharedResources;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Localization;
+using FishFarm.Services;
 
 namespace FishFarmWeb.Controllers
 {

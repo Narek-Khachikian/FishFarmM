@@ -123,6 +123,12 @@
   <data name="-- Select a Tank Shape --" xml:space="preserve">
     <value>-- Select a Tank Shape --</value>
   </data>
+  <data name="Back to tanks" xml:space="preserve">
+    <value>Back to tanks</value>
+  </data>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
+  </data>
   <data name="Create Tank" xml:space="preserve">
     <value>Create Tank</value>
   </data>

@@ -1,0 +1,97 @@
+﻿@inject IViewLocalizer _localizer
+@model TankCreateViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1>@_localizer["Delete Tank"]</h1>
+</div>
+
+<p class="text-danger">@_localizer["Are you sure you want to delete this tank?"]</p>
+
+<table class="table">
+    <tr class="d-flex">
+        <td class="col-2"></td>
+        <td class="col-8">
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="DeleteTankComfirmed" method="post" id="DeleteForm">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Tank.Id" class="control-label"></label>
+                            <input disabled asp-for="Tank.Id"  class="form-control" />
+                            <input hidden asp-for="Tank.Id" name="id" class="form-control" />
+                        </div>
+                    </form>
+                    <div class="form-group">
+                        <label asp-for="Tank.Name" class="control-label"></label>
+                        <input disabled asp-for="Tank.Name" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tank.Lenght" class="control-label"></label>
+                        <span>@_localizer["[m]"]</span>
+                        <input disabled asp-for="Tank.Lenght" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tank.Width" class="control-label"></label>
+                        <span>@_localizer["[m]"]</span>
+                        <input disabled asp-for="Tank.Width" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tank.Depth" class="control-label"></label>
+                        <span>@_localizer["[m]"]</span>
+                        <input disabled asp-for="Tank.Depth" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tank.Volume" class="control-label"></label>
+                        <span>@_localizer["[m^3]"]</span>
+                        <input disabled asp-for="Tank.Volume" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tank.SurfaceArea" class="control-label"></label>
+                        <span>@_localizer["[m^2]"]</span>
+                        <input disabled asp-for="Tank.SurfaceArea" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tank.Shape" class="control-label"></label>
+                        <select disabled asp-for="Tank.Shape" asp-items="Html.GetEnumSelectList<TankShape>()" class="form-control">
+                            <option selected value="@Model.Tank.Shape">@Enum.GetName(typeof(TankShape), Model.Tank.Shape)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tank.Section" class="control-label"></label>
+                        <select disabled asp-for="Tank.SectionId" class="form-control">
+                            <option selected value="@Model.Tank.SectionId">@Model.Sections.Where(s => s.Id == Model.Tank.SectionId).FirstOrDefault().Name</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tank.CreationDate" class="control-label"></label>
+                        <input disabled asp-for="Tank.CreationDate" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tank.LastModificationDate" class="control-label"></label>
+                        <input disabled asp-for="Tank.LastModificationDate" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Tank.LastModifiedByName" class="control-label"></label>
+                        <input disabled asp-for="Tank.LastModifiedByName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+
+                        <input type="submit" value="@_localizer["Delete"]" class="btn btn-danger" form="DeleteForm" />
+                        <a asp-action="@nameof(TanksController.EditTank)" asp-route-id="@Model.Tank.Id"
+                           class="btn btn-warning">@_localizer["Edit"]</a>
+                    </div>
+
+                </div>
+            </div>
+            <div>
+                <a asp-action="Index">@_localizer["Back to tanks"]</a>
+            </div>
+        </td>
+        <td class="col-2"></td>
+    </tr>
+</table>
+

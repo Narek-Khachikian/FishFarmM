@@ -41,6 +41,23 @@ namespace FishFarm.Services
 
         Task<int> AddTankAsync(Tank model);
 
+        Task<Tank> GetTankByIdAsync(long id);
+
+
+        /// <summary>
+        /// Updates the Tank entity if modified
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>Return -5 if nothing changed, otherwise returns savechange result</returns>
+        Task<int> UpdateTankAsync(Tank model);
+
+
+        /// <summary>
+        /// Deletes the Tank entity
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns>Returns -5 if tank not found, otherwise returns savechange result</returns>
+        Task<int> DeleteTankAsync(long id);
 
         #endregion
     }
