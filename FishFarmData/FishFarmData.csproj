@@ -17,6 +17,24 @@
     <Compile Remove="Migrations\20200924075039_StatusAdded.Designer.cs" />
     <Compile Remove="Migrations\20200924075332_StatusAdded.cs" />
     <Compile Remove="Migrations\20200924075332_StatusAdded.Designer.cs" />
+    <Compile Remove="Migrations\20200924080740_CreateInitial.cs" />
+    <Compile Remove="Migrations\20200924080740_CreateInitial.Designer.cs" />
+    <Compile Remove="Migrations\20200926151824_InOutModifed.cs" />
+    <Compile Remove="Migrations\20200926151824_InOutModifed.Designer.cs" />
+    <Compile Remove="Migrations\20200926153957_CreateInitial.cs" />
+    <Compile Remove="Migrations\20200926153957_CreateInitial.Designer.cs" />
+    <Compile Remove="Migrations\20200926155040_CreateInitial.cs" />
+    <Compile Remove="Migrations\20200926155040_CreateInitial.Designer.cs" />
+    <Compile Remove="Migrations\20200926155854_CreateInitial.cs" />
+    <Compile Remove="Migrations\20200926155854_CreateInitial.Designer.cs" />
+    <Compile Remove="Migrations\20200926160716_CreateInitial.cs" />
+    <Compile Remove="Migrations\20200926160716_CreateInitial.Designer.cs" />
+    <Compile Remove="Migrations\20200926160753_CreateInitial.cs" />
+    <Compile Remove="Migrations\20200926160753_CreateInitial.Designer.cs" />
+    <Compile Remove="Migrations\20200926162211_CreateInitial.cs" />
+    <Compile Remove="Migrations\20200926162211_CreateInitial.Designer.cs" />
+    <Compile Remove="Migrations\20200926162741_CreateInitial.cs" />
+    <Compile Remove="Migrations\20200926162741_CreateInitial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

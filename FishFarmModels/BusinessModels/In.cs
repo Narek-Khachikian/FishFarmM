@@ -6,6 +6,7 @@ namespace FishFarm.Models
 {
     public class In : BaseModel
     {
+        public bool IsNull { get; set; }
 
         public long InOutId { get; set; }
         public InOut InOut { get; set; }

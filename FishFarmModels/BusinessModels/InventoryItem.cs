@@ -8,7 +8,7 @@ namespace FishFarm.Models
     {
         public string Name { get; set; }
         public double Quantity { get; set; }
-
+        public bool IsFeed { get; set; }
 
 
         public long SupplierId { get; set; }

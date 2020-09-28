@@ -28,6 +28,7 @@ namespace FishFarm.Data
             modelBuilder.Entity<DailyReport>().Property(nameof(DailyReport.Status)).HasDefaultValue(true);
             modelBuilder.Entity<Contact>().Property(nameof(Contact.Status)).HasDefaultValue(true);
             modelBuilder.Entity<Batch>().Property(nameof(Batch.Status)).HasDefaultValue(true);
+
         }
 
         public DbSet<Section> Sections { get; set; }
@@ -40,10 +41,8 @@ namespace FishFarm.Data
         public DbSet<InventoryIn> InventoryIns { get; set; }
         public DbSet<InOut> InOuts { get; set; }
         public DbSet<In> Ins { get; set; }
-        public DbSet<Feed> Feeds { get; set; }
         public DbSet<DailyReport> DailyReports { get; set; }
         public DbSet<Contact> Contacts { get; set; }
-        public DbSet<BatchSupplier> BatchSuppliers { get; set; }
         public DbSet<Batch> Batches { get; set; }
     }
 }

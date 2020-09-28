@@ -35,8 +35,8 @@ namespace FishFarmData.Migrations
                     b.Property<double>("AverageWeight")
                         .HasColumnType("float");
 
-                    b.Property<long>("BatchSupplierId")
-                        .HasColumnType("bigint");
+                    b.Property<string>("Country")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
@@ -61,12 +61,15 @@ namespace FishFarmData.Migrations
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
 
+                    b.Property<long>("SupplierId")
+                        .HasColumnType("bigint");
+
                     b.Property<double>("Weight")
                         .HasColumnType("float");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("BatchSupplierId");
+                    b.HasIndex("SupplierId");
 
                     b.ToTable("Batches");
                 });
@@ -142,7 +145,7 @@ namespace FishFarmData.Migrations
                     b.Property<double>("FeedAmount")
                         .HasColumnType("float");
 
-                    b.Property<long>("FeedId")
+                    b.Property<long>("InventoryItemId")
                         .HasColumnType("bigint");
 
                     b.Property<DateTime>("LastModificationDate")
@@ -161,7 +164,7 @@ namespace FishFarmData.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("FeedId");
+                    b.HasIndex("InventoryItemId");
 
                     b.HasIndex("TankId");
 
@@ -181,8 +184,8 @@ namespace FishFarmData.Migrations
                     b.Property<long>("InOutId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("InOutId1")
-                        .HasColumnType("bigint");
+                    b.Property<bool>("IsNull")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("LastModificationDate")
                         .HasColumnType("datetime2");
@@ -200,7 +203,8 @@ namespace FishFarmData.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InOutId1");
+                    b.HasIndex("InOutId")
+                        .IsUnique();
 
                     b.HasIndex("TankId");
 
@@ -229,9 +233,6 @@ namespace FishFarmData.Migrations
                     b.Property<DateTime>("Date")
                         .HasColumnType("datetime2");
 
-                    b.Property<long?>("InId")
-                        .HasColumnType("bigint");
-
                     b.Property<int>("InOutType")
                         .HasColumnType("int");
 
@@ -240,9 +241,6 @@ namespace FishFarmData.Migrations
 
                     b.Property<string>("LastModifiedByName")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<long?>("OutId")
-                        .HasColumnType("bigint");
 
                     b.Property<long>("Quantity")
                         .HasColumnType("bigint");
@@ -256,6 +254,8 @@ namespace FishFarmData.Migrations
                         .HasColumnType("float");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BatchId");
 
                     b.ToTable("InOuts");
                 });
@@ -307,9 +307,8 @@ namespace FishFarmData.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsFeed")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("LastModificationDate")
                         .HasColumnType("datetime2");
@@ -344,8 +343,6 @@ namespace FishFarmData.Migrations
                     b.HasIndex("SupplierId");
 
                     b.ToTable("InventoryItems");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("InventoryItem");
                 });
 
             modelBuilder.Entity("FishFarm.Models.MesurmentUnit", b =>
@@ -390,8 +387,8 @@ namespace FishFarmData.Migrations
                     b.Property<long>("InOutId")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("InOutId1")
-                        .HasColumnType("bigint");
+                    b.Property<bool>("IsNull")
+                        .HasColumnType("bit");
 
                     b.Property<bool>("IsTankEmpty")
                         .HasColumnType("bit");
@@ -412,7 +409,8 @@ namespace FishFarmData.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("InOutId1");
+                    b.HasIndex("InOutId")
+                        .IsUnique();
 
                     b.HasIndex("TankId");
 
@@ -436,7 +434,9 @@ namespace FishFarmData.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(450)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(64)")
+                        .HasMaxLength(64);
 
                     b.Property<bool?>("Status")
                         .ValueGeneratedOnAdd()
@@ -446,8 +446,7 @@ namespace FishFarmData.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("Name")
-                        .IsUnique()
-                        .HasFilter("[Name] IS NOT NULL");
+                        .IsUnique();
 
                     b.ToTable("Sections");
                 });
@@ -462,9 +461,8 @@ namespace FishFarmData.Migrations
                     b.Property<DateTime>("CreationDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<bool>("IsBatchSupplier")
+                        .HasColumnType("bit");
 
                     b.Property<DateTime>("LastModificationDate")
                         .HasColumnType("datetime2");
@@ -486,8 +484,6 @@ namespace FishFarmData.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Suppliers");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("Supplier");
                 });
 
             modelBuilder.Entity("FishFarm.Models.Tank", b =>
@@ -513,7 +509,9 @@ namespace FishFarmData.Migrations
                         .HasColumnType("float");
 
                     b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
+                        .IsRequired()
+                        .HasColumnType("nvarchar(64)")
+                        .HasMaxLength(64);
 
                     b.Property<long>("SectionId")
                         .HasColumnType("bigint");
@@ -542,28 +540,11 @@ namespace FishFarmData.Migrations
                     b.ToTable("Tanks");
                 });
 
-            modelBuilder.Entity("FishFarm.Models.Feed", b =>
-                {
-                    b.HasBaseType("FishFarm.Models.InventoryItem");
-
-                    b.HasDiscriminator().HasValue("Feed");
-                });
-
-            modelBuilder.Entity("FishFarm.Models.BatchSupplier", b =>
-                {
-                    b.HasBaseType("FishFarm.Models.Supplier");
-
-                    b.Property<string>("Country")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasDiscriminator().HasValue("BatchSupplier");
-                });
-
             modelBuilder.Entity("FishFarm.Models.Batch", b =>
                 {
-                    b.HasOne("FishFarm.Models.BatchSupplier", "BatchSupplier")
+                    b.HasOne("FishFarm.Models.Supplier", "Supplier")
                         .WithMany()
-                        .HasForeignKey("BatchSupplierId")
+                        .HasForeignKey("SupplierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -579,9 +560,9 @@ namespace FishFarmData.Migrations
 
             modelBuilder.Entity("FishFarm.Models.DailyReport", b =>
                 {
-                    b.HasOne("FishFarm.Models.Feed", "Feed")
+                    b.HasOne("FishFarm.Models.InventoryItem", "InventoryItem")
                         .WithMany()
-                        .HasForeignKey("FeedId")
+                        .HasForeignKey("InventoryItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -595,12 +576,23 @@ namespace FishFarmData.Migrations
             modelBuilder.Entity("FishFarm.Models.In", b =>
                 {
                     b.HasOne("FishFarm.Models.InOut", "InOut")
-                        .WithMany()
-                        .HasForeignKey("InOutId1");
+                        .WithOne("In")
+                        .HasForeignKey("FishFarm.Models.In", "InOutId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FishFarm.Models.Tank", "Tank")
                         .WithMany("Ins")
                         .HasForeignKey("TankId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("FishFarm.Models.InOut", b =>
+                {
+                    b.HasOne("FishFarm.Models.Batch", "Batch")
+                        .WithMany("InOuts")
+                        .HasForeignKey("BatchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -630,8 +622,10 @@ namespace FishFarmData.Migrations
             modelBuilder.Entity("FishFarm.Models.Out", b =>
                 {
                     b.HasOne("FishFarm.Models.InOut", "InOut")
-                        .WithMany()
-                        .HasForeignKey("InOutId1");
+                        .WithOne("Out")
+                        .HasForeignKey("FishFarm.Models.Out", "InOutId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("FishFarm.Models.Tank", "Tank")
                         .WithMany("Outs")

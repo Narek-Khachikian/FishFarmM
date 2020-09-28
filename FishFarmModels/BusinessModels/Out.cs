@@ -8,6 +8,8 @@ namespace FishFarm.Models
     {
         public bool IsTankEmpty { get; set; }
 
+        public bool IsNull { get; set; }
+
         public long InOutId { get; set; }
         public InOut InOut { get; set; }
 

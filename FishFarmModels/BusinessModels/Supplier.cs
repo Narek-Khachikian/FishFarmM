@@ -9,6 +9,8 @@ namespace FishFarm.Models
         public string Name { get; set; }
         public string TINCode { get; set; }
 
+        public bool IsBatchSupplier { get; set; }
+
         public IEnumerable<Contact> Contacts { get; set; }
         
     }

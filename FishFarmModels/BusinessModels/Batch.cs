@@ -13,10 +13,13 @@ namespace FishFarm.Models
         public double AverageWeight { get; set; } //in g
         public double AverageLenght { get; set; } //in mm
         public long AlocatedQuantity { get; set; } //in whole number, in the end should be equal to the Quantity
+        public string Country { get; set; }
 
 
-        public long BatchSupplierId { get; set; }
-        public BatchSupplier BatchSupplier { get; set; }
+        public long SupplierId { get; set; }
+        public Supplier Supplier { get; set; }
+
+        public IEnumerable<InOut> InOuts { get; set; }
 
     }
 }

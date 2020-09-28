@@ -14,8 +14,8 @@ namespace FishFarm.Models
 
 
         
-        public long FeedId { get; set; }
-        public Feed Feed { get; set; }
+        public long InventoryItemId { get; set; }
+        public InventoryItem InventoryItem { get; set; }
 
 
 
