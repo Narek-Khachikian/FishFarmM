@@ -117,108 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="A section with that name already exists" xml:space="preserve">
-    <value>A section with that name already exists</value>
+  <data name="Back to Sections" xml:space="preserve">
+    <value>Back to Sections</value>
   </data>
-  <data name="A supplier with the same TIN exists" xml:space="preserve">
-    <value>A supplier with the same TIN exists</value>
-  </data>
-  <data name="A tank with that name already exists" xml:space="preserve">
-    <value>A tank with that name already exists</value>
-  </data>
-  <data name="Administration" xml:space="preserve">
-    <value>Administration</value>
-  </data>
-  <data name="Circular" xml:space="preserve">
-    <value>Circular</value>
-    <comment>TankShape Enum</comment>
-  </data>
-  <data name="Create Section" xml:space="preserve">
-    <value>Create Section</value>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
   </data>
   <data name="Create Supplier" xml:space="preserve">
     <value>Create Supplier</value>
-  </data>
-  <data name="Create Tank" xml:space="preserve">
-    <value>Create Tank</value>
-  </data>
-  <data name="Delete Section" xml:space="preserve">
-    <value>Delete Section</value>
-  </data>
-  <data name="Delete Tank" xml:space="preserve">
-    <value>Delete Tank</value>
-  </data>
-  <data name="Details" xml:space="preserve">
-    <value>Details</value>
-  </data>
-  <data name="Edit Section" xml:space="preserve">
-    <value>Edit Section</value>
-  </data>
-  <data name="Edit Tank" xml:space="preserve">
-    <value>Edit Tank</value>
-  </data>
-  <data name="Failed to create" xml:space="preserve">
-    <value>Failed to create</value>
-  </data>
-  <data name="Home" xml:space="preserve">
-    <value>Home</value>
-  </data>
-  <data name="Nothing changed" xml:space="preserve">
-    <value>Nothing changed</value>
-  </data>
-  <data name="Nothing deleted" xml:space="preserve">
-    <value>Nothing deleted</value>
-  </data>
-  <data name="Oval" xml:space="preserve">
-    <value>Oval</value>
-    <comment>TankShape Enum</comment>
-  </data>
-  <data name="Rectangle" xml:space="preserve">
-    <value>Rectangle</value>
-    <comment>TankShape Enum</comment>
-  </data>
-  <data name="Section created successfully" xml:space="preserve">
-    <value>Section created successfully</value>
-  </data>
-  <data name="Section Deleted successfully" xml:space="preserve">
-    <value>Section Deleted successfully</value>
-  </data>
-  <data name="Section modified successfully" xml:space="preserve">
-    <value>Section modified successfully</value>
-  </data>
-  <data name="Sections" xml:space="preserve">
-    <value>Sections</value>
-  </data>
-  <data name="Selected section is missing" xml:space="preserve">
-    <value>Selected section is missing</value>
-  </data>
-  <data name="Selected tank was missing" xml:space="preserve">
-    <value>Selected tank was missing</value>
-  </data>
-  <data name="Settings" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="Square" xml:space="preserve">
-    <value>Square</value>
-    <comment>TankShape Enum</comment>
-  </data>
-  <data name="Supplier created successfully" xml:space="preserve">
-    <value>Supplier created successfully</value>
-  </data>
-  <data name="Suppliers" xml:space="preserve">
-    <value>Suppliers</value>
-  </data>
-  <data name="Tank created successfully" xml:space="preserve">
-    <value>Tank created successfully</value>
-  </data>
-  <data name="Tank modified successfully" xml:space="preserve">
-    <value>Tank modified successfully</value>
-  </data>
-  <data name="Tanks" xml:space="preserve">
-    <value>Tanks</value>
-  </data>
-  <data name="UnKnown" xml:space="preserve">
-    <value>Un-Known</value>
-    <comment>TankShape Enum</comment>
   </data>
 </root>

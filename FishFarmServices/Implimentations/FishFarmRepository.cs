@@ -182,5 +182,36 @@ namespace FishFarm.Services
 
         #endregion
 
+
+        #region Suppliers
+
+
+        public async Task<IEnumerable<Supplier>> GetSuppliersAsync()
+        {
+            return await _dbContext.Suppliers.OrderBy(s=>s.Name).ToListAsync();
+        }
+
+
+        public async Task<int> AddSupplierAsync(Supplier model)
+        {
+            model.CreationDate = DateTime.UtcNow;
+            model.LastModificationDate = model.CreationDate;
+            _dbContext.Suppliers.Add(model);
+            return await _dbContext.SaveChangesAsync();
+        }
+
+
+        public async Task<bool> SupplierWithTINExistsAsync(Supplier model)
+        {
+            if(model.TINCode == string.Empty)
+            {
+                return false;
+            }
+            return await _dbContext.Suppliers.Where(s => s.TINCode == model.TINCode).AnyAsync();
+        }
+
+
+        #endregion
+
     }
 }

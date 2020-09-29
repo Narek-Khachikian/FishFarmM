@@ -49,7 +49,7 @@ namespace FishFarmWeb.Controllers
             {
                 if (await _repository.SectionExistsAsync(model.Name))
                 {
-                    ModelState.AddModelError("Section Exists", _stringLocalizer["A section with that name already exists"]);
+                    ModelState.AddModelError("Section Exists", _stringLocalizer["A section with that name already exists"].ToString());
                 }
                 else
                 {

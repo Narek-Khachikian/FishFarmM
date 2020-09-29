@@ -1,0 +1,84 @@
+﻿@inject IViewLocalizer _localizer
+@model SupplierIndexViewModel
+
+<div class="container">
+    <h1>@_localizer["All Suppliers"]</h1>
+</div>
+
+<a asp-controller="Suppliers" asp-action="CreateSupplier" class="btn btn-primary">@_localizer["Create New"]</a>
+@TempData["SupplierMessage"]
+<div>
+    <table class="table">
+        <tr class="d-flex">
+            <td class="table- col-2">
+            </td>
+            <td class="col-8">
+                <table class="table table-bordered">
+                    <tr class="d-flex">
+                        <th class="col-1">
+                            @_localizer["Id"]
+                        </th>
+                        <th class="col-3">
+                            @_localizer["Name"]
+                        </th>
+                        <th class="col-1">
+                            @_localizer["Batch Sup?"]
+                        </th>
+                        <th class="col-1">
+                            @_localizer["Active?"]
+                        </th>
+                        <th class="col-3">
+                            @_localizer["Options"]
+                        </th>
+                        <th class="col-3">
+                            @_localizer["Message"]
+                        </th>
+                    </tr>
+
+                    @foreach (Supplier item in Model.Suppliers)
+                    {
+                        <tr class="d-flex">
+                            <td class="col-1">
+                                @item.Id
+                            </td>
+                            <td class="col-3">
+                                @item.Name
+                            </td>
+                            <td class="col-1">
+                                @if (@item.IsBatchSupplier)
+                                {
+                                    <span class="fas fa-check fa-2x text-info"></span>
+                                }
+                                else
+                                {
+                                    <span></span>
+                                }
+
+                            </td>
+                            <td class="col-1">
+                                @if (@item.Status.Value == true)
+                                {
+                                    <span class="fas fa-check fa-2x text-info"></span>
+                                }
+                                else
+                                {
+                                    <span></span>
+                                }
+                            </td>
+                            <td class="col-3">
+                                <a asp-controller="Suppliers" asp-action="EditSupplier" asp-route-id="@item.Id" class="btn btn-warning">@_localizer["Edit"]</a>
+                                <a asp-controller="Suppliers" asp-action="DeleteSupplier" asp-route-id="@item.Id" class="btn btn-danger">@_localizer["Delete"]</a>
+                                <a asp-controller="Suppliers" asp-action="DetailSupplier" asp-route-id="@item.Id" class="btn btn-secondary">@_localizer["Details"]</a>
+                            </td>
+                            <td class="col-3">
+                                <span></span>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </td>
+            <td class="col-2">
+            </td>
+        </tr>
+    </table>
+</div>

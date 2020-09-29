@@ -60,5 +60,19 @@ namespace FishFarm.Services
         Task<int> DeleteTankAsync(long id);
 
         #endregion
+
+
+
+        #region Supplier
+
+
+        Task<IEnumerable<Supplier>> GetSuppliersAsync();
+
+        Task<int> AddSupplierAsync(Supplier model);
+
+        Task<bool> SupplierWithTINExistsAsync(Supplier model);
+
+
+        #endregion
     }
 }

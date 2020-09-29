@@ -50,7 +50,8 @@
                         <a class="nav-link disabled" href="#">@_localizer["Disabled"]</a>
                     </li>
                 </ul>
-
+                <a class="fa-2x fas fa-paperclip" asp-controller="Administration" asp-action="Index"></a>
+                &ensp;
                 <a class="fa-2x fas fa-cog m-1" asp-controller="Settings" asp-action="Index"></a>
                 &ensp;
                 @foreach (var pair in _cultures.SupportedCulture)
