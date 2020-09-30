@@ -73,6 +73,27 @@ namespace FishFarmWeb.Controllers
 
 
 
+        public async Task<IActionResult> EditSupplier(long id)
+        {
+            SupplierEditViewModel model = new SupplierEditViewModel()
+            {
+                Supplier = await _repository.GetSupplierByIdAsync(id)
+            };
+            if(model != null)
+            {
+                ViewBag.Title = _stringLocalizer["Edit Supplier"].ToString();
+                return View(model);
+            }
+            TempData["SupplierMessage"] = _stringLocalizer["Selected Supplier was missing"].ToString();
+            return RedirectToAction(nameof(Index));
+        }
+
+
+        //[HttpPost,AutoValidateAntiforgeryToken]
+        //public async Task<IActionResult> EditSupplier()
+        //{
+
+        //}
 
     }
 }

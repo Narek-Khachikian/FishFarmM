@@ -53,10 +53,9 @@
                                 {
                                     <span></span>
                                 }
-
                             </td>
                             <td class="col-1">
-                                @if (@item.Status.Value == true)
+                                @if (@item.Status == true)
                                 {
                                     <span class="fas fa-check fa-2x text-info"></span>
                                 }
@@ -67,7 +66,7 @@
                             </td>
                             <td class="col-3">
                                 <a asp-controller="Suppliers" asp-action="EditSupplier" asp-route-id="@item.Id" class="btn btn-warning">@_localizer["Edit"]</a>
-                                <a asp-controller="Suppliers" asp-action="DeleteSupplier" asp-route-id="@item.Id" class="btn btn-danger">@_localizer["Delete"]</a>
+                                @*<a asp-controller="Suppliers" asp-action="DeleteSupplier" asp-route-id="@item.Id" class="btn btn-danger">@_localizer["Delete"]</a>*@
                                 <a asp-controller="Suppliers" asp-action="DetailSupplier" asp-route-id="@item.Id" class="btn btn-secondary">@_localizer["Details"]</a>
                             </td>
                             <td class="col-3">

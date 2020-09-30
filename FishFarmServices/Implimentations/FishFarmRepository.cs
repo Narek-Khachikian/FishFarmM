@@ -211,6 +211,123 @@ namespace FishFarm.Services
         }
 
 
+        public async Task<Supplier> GetSupplierByIdAsync(long id)
+        {
+            Supplier result = await _dbContext.Suppliers.Where(s=>s.Id == id)?.Include(s=>s.Contacts).FirstOrDefaultAsync();
+            return result;
+        }
+
+
+        #endregion
+
+
+
+        #region Contacts
+
+
+        public async Task<int> AddContactAsync(Contact model)
+        {
+            model.CreationDate = DateTime.UtcNow;
+            model.LastModificationDate = model.CreationDate;
+            await _dbContext.Contacts.AddAsync(model);
+            return await _dbContext.SaveChangesAsync();
+        }
+
+
+        public async Task<Contact> GetContactByIdAsync(long id)
+        {
+            return await _dbContext.Contacts.FindAsync(id);
+        }
+
+
+        public async Task<int> UpdateContactAsync(Contact model)
+        {
+            int result = 0;
+            Contact tempModel = await GetContactByIdAsync(model.Id);
+            if ( tempModel != null)
+            {
+                if (!string.IsNullOrEmpty(model.PhoneNumber) 
+                    && string.IsNullOrEmpty(model.Address) 
+                    && string.IsNullOrEmpty(model.Email)
+                    && string.IsNullOrEmpty(model.MobileNumber))
+                {
+                    if(model.PhoneNumber != tempModel.PhoneNumber)
+                    {
+                        tempModel.PhoneNumber = model.PhoneNumber;
+                    }
+                    else
+                    {
+                        return result;
+                    }
+                }
+                else if(string.IsNullOrEmpty(model.PhoneNumber) 
+                    && !string.IsNullOrEmpty(model.Address) 
+                    && string.IsNullOrEmpty(model.Email)
+                    && string.IsNullOrEmpty(model.MobileNumber))
+                {
+                     if (model.Address != tempModel.Address)
+                     {
+                        tempModel.Address = model.Address;
+                     }
+                     else
+                     {
+                        return result;
+                     }
+                }
+                else if (string.IsNullOrEmpty(model.PhoneNumber) 
+                    && string.IsNullOrEmpty(model.Address) 
+                    && !string.IsNullOrEmpty(model.Email)
+                    && string.IsNullOrEmpty(model.MobileNumber))
+                {
+                     if (model.Email != tempModel.Email)
+                     {
+                        tempModel.Email = model.Email;
+                     }
+                     else
+                     {
+                        return result;
+                     }
+                }
+                else if (string.IsNullOrEmpty(model.PhoneNumber)
+                    && string.IsNullOrEmpty(model.Address)
+                    && string.IsNullOrEmpty(model.Email)
+                    && !string.IsNullOrEmpty(model.MobileNumber))
+                {
+                     if (model.MobileNumber != tempModel.MobileNumber)
+                     {
+                        tempModel.MobileNumber = model.MobileNumber;
+                     }
+                     else
+                     {
+                        return result;
+                     }
+                }
+                else
+                {
+                     return result;
+                }
+
+                tempModel.LastModificationDate = DateTime.UtcNow;
+                _dbContext.Contacts.Update(tempModel);
+                result = await _dbContext.SaveChangesAsync();
+            }
+            return result;
+        }
+
+
+        public async Task<int> DeleteContactAsync(Contact model)
+        {
+            int result = 0;
+            Contact tempModel = await GetContactByIdAsync(model.Id);
+            if(tempModel != null)
+            {
+                _dbContext.Contacts.Remove(tempModel);
+                result = await _dbContext.SaveChangesAsync();
+            }
+            return result;
+        }
+
+
         #endregion
 
     }

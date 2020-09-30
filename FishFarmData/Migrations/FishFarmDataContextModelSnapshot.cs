@@ -56,7 +56,7 @@ namespace FishFarmData.Migrations
                     b.Property<long>("Quantity")
                         .HasColumnType("bigint");
 
-                    b.Property<bool?>("Status")
+                    b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
@@ -105,7 +105,7 @@ namespace FishFarmData.Migrations
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Status")
+                    b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
@@ -154,7 +154,7 @@ namespace FishFarmData.Migrations
                     b.Property<string>("LastModifiedByName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Status")
+                    b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
@@ -193,7 +193,7 @@ namespace FishFarmData.Migrations
                     b.Property<string>("LastModifiedByName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Status")
+                    b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
@@ -245,7 +245,7 @@ namespace FishFarmData.Migrations
                     b.Property<long>("Quantity")
                         .HasColumnType("bigint");
 
-                    b.Property<bool?>("Status")
+                    b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
@@ -285,7 +285,7 @@ namespace FishFarmData.Migrations
                     b.Property<string>("LastModifiedByName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Status")
+                    b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
@@ -328,7 +328,7 @@ namespace FishFarmData.Migrations
                     b.Property<double>("Quantity")
                         .HasColumnType("float");
 
-                    b.Property<bool?>("Status")
+                    b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
@@ -364,7 +364,7 @@ namespace FishFarmData.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Status")
+                    b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
@@ -399,7 +399,7 @@ namespace FishFarmData.Migrations
                     b.Property<string>("LastModifiedByName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Status")
+                    b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
@@ -438,7 +438,7 @@ namespace FishFarmData.Migrations
                         .HasColumnType("nvarchar(64)")
                         .HasMaxLength(64);
 
-                    b.Property<bool?>("Status")
+                    b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
@@ -473,7 +473,7 @@ namespace FishFarmData.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool?>("Status")
+                    b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);
@@ -519,7 +519,7 @@ namespace FishFarmData.Migrations
                     b.Property<int>("Shape")
                         .HasColumnType("int");
 
-                    b.Property<bool?>("Status")
+                    b.Property<bool>("Status")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("bit")
                         .HasDefaultValue(true);

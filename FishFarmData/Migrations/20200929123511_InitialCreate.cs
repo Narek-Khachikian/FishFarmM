@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace FishFarmData.Migrations
 {
-    public partial class CreateInitial : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -16,7 +16,7 @@ namespace FishFarmData.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     LastModifiedByName = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: true, defaultValue: true),
+                    Status = table.Column<bool>(nullable: false, defaultValue: true),
                     Name = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
@@ -33,7 +33,7 @@ namespace FishFarmData.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     LastModifiedByName = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: true, defaultValue: true),
+                    Status = table.Column<bool>(nullable: false, defaultValue: true),
                     Name = table.Column<string>(maxLength: 64, nullable: false)
                 },
                 constraints: table =>
@@ -50,7 +50,7 @@ namespace FishFarmData.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     LastModifiedByName = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: true, defaultValue: true),
+                    Status = table.Column<bool>(nullable: false, defaultValue: true),
                     Name = table.Column<string>(nullable: true),
                     TINCode = table.Column<string>(nullable: true),
                     IsBatchSupplier = table.Column<bool>(nullable: false)
@@ -69,7 +69,7 @@ namespace FishFarmData.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     LastModifiedByName = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: true, defaultValue: true),
+                    Status = table.Column<bool>(nullable: false, defaultValue: true),
                     Name = table.Column<string>(maxLength: 64, nullable: false),
                     Lenght = table.Column<double>(nullable: false),
                     Width = table.Column<double>(nullable: false),
@@ -99,7 +99,7 @@ namespace FishFarmData.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     LastModifiedByName = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: true, defaultValue: true),
+                    Status = table.Column<bool>(nullable: false, defaultValue: true),
                     Name = table.Column<string>(nullable: true),
                     FishType = table.Column<string>(nullable: true),
                     Quantity = table.Column<long>(nullable: false),
@@ -130,7 +130,7 @@ namespace FishFarmData.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     LastModifiedByName = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: true, defaultValue: true),
+                    Status = table.Column<bool>(nullable: false, defaultValue: true),
                     Email = table.Column<string>(nullable: true),
                     PhoneNumber = table.Column<string>(nullable: true),
                     MobileNumber = table.Column<string>(nullable: true),
@@ -158,7 +158,7 @@ namespace FishFarmData.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     LastModifiedByName = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: true, defaultValue: true),
+                    Status = table.Column<bool>(nullable: false, defaultValue: true),
                     Name = table.Column<string>(nullable: true),
                     Quantity = table.Column<double>(nullable: false),
                     IsFeed = table.Column<bool>(nullable: false),
@@ -192,7 +192,7 @@ namespace FishFarmData.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     LastModifiedByName = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: true, defaultValue: true),
+                    Status = table.Column<bool>(nullable: false, defaultValue: true),
                     Date = table.Column<DateTime>(nullable: false),
                     InOutType = table.Column<int>(nullable: false),
                     Quantity = table.Column<long>(nullable: false),
@@ -221,7 +221,7 @@ namespace FishFarmData.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     LastModifiedByName = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: true, defaultValue: true),
+                    Status = table.Column<bool>(nullable: false, defaultValue: true),
                     Date = table.Column<DateTime>(nullable: false),
                     DeadFish = table.Column<long>(nullable: false),
                     DeadFishWeight = table.Column<double>(nullable: false),
@@ -256,7 +256,7 @@ namespace FishFarmData.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     LastModifiedByName = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: true, defaultValue: true),
+                    Status = table.Column<bool>(nullable: false, defaultValue: true),
                     Date = table.Column<DateTime>(nullable: false),
                     InQuantity = table.Column<double>(nullable: false),
                     InventoryItemId = table.Column<long>(nullable: false)
@@ -281,7 +281,7 @@ namespace FishFarmData.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     LastModifiedByName = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: true, defaultValue: true),
+                    Status = table.Column<bool>(nullable: false, defaultValue: true),
                     IsNull = table.Column<bool>(nullable: false),
                     InOutId = table.Column<long>(nullable: false),
                     TankId = table.Column<long>(nullable: false)
@@ -312,7 +312,7 @@ namespace FishFarmData.Migrations
                     CreationDate = table.Column<DateTime>(nullable: false),
                     LastModificationDate = table.Column<DateTime>(nullable: false),
                     LastModifiedByName = table.Column<string>(nullable: true),
-                    Status = table.Column<bool>(nullable: true, defaultValue: true),
+                    Status = table.Column<bool>(nullable: false, defaultValue: true),
                     IsTankEmpty = table.Column<bool>(nullable: false),
                     IsNull = table.Column<bool>(nullable: false),
                     InOutId = table.Column<long>(nullable: false),

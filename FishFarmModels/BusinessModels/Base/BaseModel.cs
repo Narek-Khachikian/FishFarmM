@@ -16,6 +16,6 @@ namespace FishFarm.Models
         public string LastModifiedByName { get; set; }
 
         [DefaultValue(true)]
-        public bool? Status { get; set; }
+        public bool Status { get; set; }
     }
 }

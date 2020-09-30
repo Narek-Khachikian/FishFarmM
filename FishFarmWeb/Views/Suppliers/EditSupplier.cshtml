@@ -1,0 +1,299 @@
+﻿@inject IViewLocalizer _localizer
+@model SupplierEditViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1>@_localizer["Edit Supplier"]</h1>
+</div>
+
+
+<table class="table">
+    <tr class="d-flex">
+        <td class="col-2"></td>
+        <td class="col-4">
+            <div class="row">
+                <div class="col-md-8">
+                    <form asp-action="EditSupplier" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="Supplier.Id" class="control-label"></label>
+                            <input disabled asp-for="Supplier.Id" class="form-control" />
+                            <input hidden asp-for="Supplier.Id" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Supplier.Name" class="control-label"></label>
+                            <input asp-for="Supplier.Name" class="form-control" />
+                            <span asp-validation-for="Supplier.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Supplier.TINCode" class="control-label"></label>
+                            <input asp-for="Supplier.TINCode" class="form-control" />
+                            <span asp-validation-for="Supplier.TINCode" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Supplier.IsBatchSupplier" class="control-label"></label>
+                            <input type="checkbox" asp-for="Supplier.IsBatchSupplier" class="form-control" style="resize:both; width:20px" />
+                            <span asp-validation-for="Supplier.IsBatchSupplier" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="Supplier.Status" class="control-label"></label>
+                            <input type="checkbox" asp-for="Supplier.Status" class="form-control" style="resize:both; width:20px" />
+                            <span asp-validation-for="Supplier.Status" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="@_localizer["Edit"]" class="btn btn-warning" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div>
+                <a asp-action="Index">@_localizer["Back to tanks"]</a>
+            </div>
+        </td>
+        <td class="col-4">
+            <table class="table">
+                @if (Model.Supplier.Contacts.Where(c => c.PhoneNumber != null).Any())
+                {
+                    <tr class="d-flex">
+                        <td class="col-3">@_localizer["Phone"]</td>
+                        <td class="col-9">
+                            @foreach (var item in Model.Supplier.Contacts.Where(c => c.PhoneNumber != null))
+                            {
+                                <div>
+                                    <form asp-controller="Contacts" asp-action="EditContactPhone" method="post" id="@("ChangeContactPhoneForm"+item.Id)">
+                                        <input hidden asp-for="Contact.Id" value="@item.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                    </form>
+                                </div>
+                                <div>
+                                    <form asp-controller="Contacts" asp-action="DeleteContactPhone" method="post" id="@("DeleteContactPhoneForm"+item.Id)">
+                                        <input hidden asp-for="Contact.Id" value="@item.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                    </form>
+                                </div>
+                                <div class="d-inline-flex">
+                                    <input type="tel" asp-for="Contact.PhoneNumber" value="@item.PhoneNumber" form="@("ChangeContactPhoneForm"+item.Id)" 
+                                           class="form-control" style="min-width:300px" />
+                                    <button type="submit" form="@("ChangeContactPhoneForm"+item.Id)" class="btn fas fa-sync-alt"></button>
+                                    <button type="submit" form="@("DeleteContactPhoneForm"+item.Id)" class="btn fas fa-trash-alt"></button>
+                                </div>
+                            }
+                            <div>
+                                <form asp-controller="Contacts" asp-action="AddContactPhone" method="post">
+                                    <div class="d-inline-flex">
+                                        <input type="tel" asp-for="@Model.Contact.PhoneNumber" class="form-control" style="min-width:300px" />
+                                        <input hidden asp-for="Contact.SupplierId" value="@Model.Supplier.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                        <button type="submit" class="btn fas fa-check" />
+                                    </div>
+                                    <div asp-validation-summary="All"></div>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="d-flex">
+                        <td class="col-3">@_localizer["Phone"]</td>
+                        <td class="col-9">
+                            <div>
+                                <form asp-controller="Contacts" asp-action="AddContactPhone" method="post">
+                                    <div class="d-inline-flex">
+                                        <input type="tel" asp-for="@Model.Contact.PhoneNumber" class="form-control" style="min-width:300px" />
+                                        <input hidden asp-for="Contact.SupplierId" value="@Model.Supplier.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                        <button type="submit" class="btn fas fa-check" />
+                                    </div>
+                                    <div asp-validation-summary="All"></div>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                @if (Model.Supplier.Contacts.Where(c => c.MobileNumber != null).Any())
+                {
+                    <tr class="d-flex">
+                        <td class="col-3">@_localizer["Mobile"]</td>
+                        <td class="col-9">
+                            @foreach (var item in Model.Supplier.Contacts.Where(c => c.MobileNumber != null))
+                            {
+                                <div>
+                                    <form asp-controller="Contacts" asp-action="EditContactMobile" method="post" id="@("ChangeContactMobileForm"+item.Id)">
+                                        <input hidden asp-for="Contact.Id" value="@item.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                    </form>
+                                </div>
+                                <div>
+                                    <form asp-controller="Contacts" asp-action="DeleteContactMobile" method="post" id="@("DeleteContactMobileForm"+item.Id)">
+                                        <input hidden asp-for="Contact.Id" value="@item.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                    </form>
+                                </div>
+                                <div class="d-inline-flex">
+                                    <input asp-for="Contact.MobileNumber" value="@item.MobileNumber" form="@("ChangeContactMobileForm"+item.Id)" 
+                                           type="tel" style="min-width:300px" class="form-control" />
+                                    <button type="submit" form="@("ChangeContactMobileForm"+item.Id)" class="btn fas fa-sync-alt"></button>
+                                    <button type="submit" form="@("DeleteContactMobileForm"+item.Id)" class="btn fas fa-trash-alt"></button>
+                                </div>
+                            }
+                            <div>
+                                <form asp-controller="Contacts" asp-action="AddContactMobile" method="post">
+                                    <div class="d-inline-flex">
+                                        <input type="tel" asp-for="@Model.Contact.MobileNumber" class="form-control" style="min-width:300px"/>
+                                        <input hidden asp-for="Contact.SupplierId" value="@Model.Supplier.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                        <button type="submit" class="btn fas fa-check" />
+                                    </div>
+                                    <div asp-validation-summary="All"></div>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="d-flex">
+                        <td class="col-3">@_localizer["Mobile"]</td>
+                        <td class="col-9">
+                            <div>
+                                <form asp-controller="Contacts" asp-action="AddContactMobile" method="post">
+                                    <div class="d-inline-flex">
+                                        <input type="tel" asp-for="@Model.Contact.MobileNumber" class="form-control" style="min-width:300px" />
+                                        <input hidden asp-for="Contact.SupplierId" value="@Model.Supplier.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                        <button type="submit" class="btn fas fa-check" />
+                                    </div>
+                                    <div asp-validation-summary="All"></div>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                @if (Model.Supplier.Contacts.Where(c => c.MobileNumber != null).Any())
+                {
+                    <tr class="d-flex">
+                        <td class="col-3">@_localizer["Email"]</td>
+                        <td class="col-9">
+                            @foreach (var item in Model.Supplier.Contacts.Where(c => c.Email != null))
+                            {
+                                <div>
+                                    <form asp-controller="Contacts" asp-action="EditContactEmail" method="post" id="@("ChangeContactEmailForm"+item.Id)">
+                                        <input hidden asp-for="Contact.Id" value="@item.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                    </form>
+                                </div>
+                                <div>
+                                    <form asp-controller="Contacts" asp-action="DeleteContactEmail" method="post" id="@("DeleteContactEmailForm"+item.Id)">
+                                        <input hidden asp-for="Contact.Id" value="@item.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                    </form>
+                                </div>
+                                <div class="d-inline-flex">
+                                    <input asp-for="Contact.Email" value="@item.Email" form="@("ChangeContactEmailForm"+item.Id)" 
+                                           type="email" class="form-control" style="min-width:300px" />
+                                    <button type="submit" form="@("ChangeContactEmailForm"+item.Id)" class="btn fas fa-sync-alt"></button>
+                                    <button type="submit" form="@("DeleteContactEmailForm"+item.Id)" class="btn fas fa-trash-alt"></button>
+                                </div>
+                            }
+                            <div>
+                                <form asp-controller="Contacts" asp-action="AddContactEmail" method="post">
+                                    <div class="d-inline-flex">
+                                        <input type="email" asp-for="@Model.Contact.Email" class="form-control" style="min-width:300px" />
+                                        <input hidden asp-for="Contact.SupplierId" value="@Model.Supplier.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                        <button type="submit" class="btn fas fa-check" />
+                                    </div>
+                                    <div asp-validation-summary="All"></div>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="d-flex">
+                        <td class="col-3">@_localizer["Email"]</td>
+                        <td class="col-9">
+                            <div>
+                                <form asp-controller="Contacts" asp-action="AddContactEmail" method="post">
+                                    <div class="d-inline-flex">
+                                        <input type="email" asp-for="@Model.Contact.Email" class="form-control" style="min-width:300px" />
+                                        <input hidden asp-for="Contact.SupplierId" value="@Model.Supplier.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                        <button type="submit" class="btn fas fa-check" />
+                                    </div>
+                                    <div asp-validation-summary="All"></div>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                @if (Model.Supplier.Contacts.Where(c => c.MobileNumber != null).Any())
+                {
+                    <tr class="d-flex">
+                        <td class="col-3">@_localizer["Address"]</td>
+                        <td class="col-9">
+                            @foreach (var item in Model.Supplier.Contacts.Where(c => c.Address != null))
+                            {
+                                <div>
+                                    <form asp-controller="Contacts" asp-action="EditContactAddress" method="post" id="@("ChangeContactAddressForm"+item.Id)">
+                                        <input hidden asp-for="Contact.Id" value="@item.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                    </form>
+                                </div>
+                                <div>
+                                    <form asp-controller="Contacts" asp-action="DeleteContactAddress" method="post" id="@("DeleteContactAddressForm"+item.Id)">
+                                        <input hidden asp-for="Contact.Id" value="@item.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                    </form>
+                                </div>
+                                <div class="d-inline-flex">
+                                    <input asp-for="Contact.Address" value="@item.Address" form="@("ChangeContactAddressForm"+item.Id)" 
+                                           type="text" class="form-control" style="min-width:300px"  />
+                                    <button type="submit" form="@("ChangeContactAddressForm"+item.Id)" class="btn fas fa-sync-alt"></button>
+                                    <button type="submit" form="@("DeleteContactAddressForm"+item.Id)" class="btn fas fa-trash-alt"></button>
+                                </div>
+                            }
+                            <div>
+                                <form asp-controller="Contacts" asp-action="AddContactAddress" method="post">
+                                    <div class="d-inline-flex">
+                                        <input type="text" asp-for="@Model.Contact.Address" class="form-control" style="min-width:300px"  />
+                                        <input hidden asp-for="Contact.SupplierId" value="@Model.Supplier.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                        <button type="submit" class="btn fas fa-check" />
+                                    </div>
+                                    <div asp-validation-summary="All"></div>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+                else
+                {
+                    <tr class="d-flex">
+                        <td class="col-3">@_localizer["Address"]</td>
+                        <td class="col-9">
+                            <div>
+                                <form asp-controller="Contacts" asp-action="AddContactAddress" method="post">
+                                    <div class="d-inline-flex">
+                                        <input type="text" asp-for="@Model.Contact.Address" class="form-control" style="min-width:300px" />
+                                        <input hidden asp-for="Contact.SupplierId" value="@Model.Supplier.Id" />
+                                        <input hidden name="returnUrl" value="@(string.IsNullOrEmpty(Context.Request.Path)?"~/":Context.Request.Path.Value)" />
+                                        <button type="submit" class="btn fas fa-check" />
+                                    </div>
+                                    <div asp-validation-summary="All"></div>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </td>
+        <td class="col-2"></td>
+    </tr>
+</table>
+

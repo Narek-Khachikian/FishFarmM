@@ -35,6 +35,8 @@
     <Compile Remove="Migrations\20200926162211_CreateInitial.Designer.cs" />
     <Compile Remove="Migrations\20200926162741_CreateInitial.cs" />
     <Compile Remove="Migrations\20200926162741_CreateInitial.Designer.cs" />
+    <Compile Remove="Migrations\20200926174136_CreateInitial.cs" />
+    <Compile Remove="Migrations\20200926174136_CreateInitial.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -53,6 +55,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\FishFarmModels\FishFarmModels.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
   </ItemGroup>
 
 </Project>

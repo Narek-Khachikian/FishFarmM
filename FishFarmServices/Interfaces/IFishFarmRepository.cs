@@ -72,6 +72,27 @@ namespace FishFarm.Services
 
         Task<bool> SupplierWithTINExistsAsync(Supplier model);
 
+        Task<Supplier> GetSupplierByIdAsync(long id);
+
+
+        #endregion
+
+
+
+        #region Contacts
+
+
+        Task<int> AddContactAsync(Contact model);
+
+
+        Task<Contact> GetContactByIdAsync(long id);
+
+
+        Task<int> UpdateContactAsync(Contact model);
+
+
+        Task<int> DeleteContactAsync(Contact model);
+
 
         #endregion
     }
