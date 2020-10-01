@@ -1,0 +1,133 @@
+﻿@inject IViewLocalizer _localizer
+@model SupplierEditViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1>@_localizer["Details"]</h1>
+</div>
+
+
+<table class="table">
+    <tr class="d-flex">
+        <td class="col-2"></td>
+        <td class="col-4">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="form-group">
+                        <label asp-for="Supplier.Id" class="control-label"></label>
+                        <input disabled asp-for="Supplier.Id" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Supplier.Name" class="control-label"></label>
+                        <input disabled asp-for="Supplier.Name" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Supplier.TINCode" class="control-label"></label>
+                        <input disabled asp-for="Supplier.TINCode" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Supplier.IsBatchSupplier" class="control-label"></label>
+                        <input disabled type="checkbox" asp-for="Supplier.IsBatchSupplier" class="form-control" style="resize:both; width:20px" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Supplier.Status" class="control-label"></label>
+                        <input disabled type="checkbox" asp-for="Supplier.Status" class="form-control" style="resize:both; width:20px" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Supplier.LastModifiedByName" class="control-label"></label>
+                        <input disabled asp-for="Supplier.LastModifiedByName" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Supplier.LastModificationDate" class="control-label"></label>
+                        <input disabled asp-for="Supplier.LastModificationDate" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Supplier.CreationDate" class="control-label"></label>
+                        <input disabled asp-for="Supplier.CreationDate" class="form-control" />
+                    </div>
+                    <div class="form-group">
+                        <a asp-controller="Suppliers" asp-action="EditSupplier" asp-route-id="@Model.Supplier.Id" class="btn btn-warning">@_localizer["Edit"]</a>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <a asp-action="Index">@_localizer["Back to suppliers"]</a>
+            </div>
+        </td>
+        <td class="col-4">
+            <table class="table">
+                @if (Model.Supplier.Contacts.Where(c => c.PhoneNumber != null).Any())
+                {
+                    <tr class="d-flex">
+                        <td class="col-3">@_localizer["Phone"]</td>
+                        <td class="col-9">
+                            @foreach (var item in Model.Supplier.Contacts.Where(c => c.PhoneNumber != null))
+                            {
+                                <div class="d-inline-flex">
+                                    <input type="tel" asp-for="Contact.PhoneNumber" value="@item.PhoneNumber"  
+                                           class="form-control" style="min-width:300px" />
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+                @if (Model.Supplier.Contacts.Where(c => c.MobileNumber != null).Any())
+                {
+                    <tr class="d-flex">
+                        <td class="col-3">@_localizer["Mobile"]</td>
+                        <td class="col-9">
+                            @foreach (var item in Model.Supplier.Contacts.Where(c => c.MobileNumber != null))
+                            {
+                                <div class="d-inline-flex">
+                                    <input type="tel" asp-for="Contact.MobileNumber" value="@item.MobileNumber"  
+                                           class="form-control" style="min-width:300px" />
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+                
+                @if (Model.Supplier.Contacts.Where(c => c.MobileNumber != null).Any())
+                {
+                    <tr class="d-flex">
+                        <td class="col-3">@_localizer["Email"]</td>
+                        <td class="col-9">
+                            @foreach (var item in Model.Supplier.Contacts.Where(c => c.Email != null))
+                            {
+                                
+                                <div class="d-inline-flex">
+                                    <input asp-for="Contact.Email" value="@item.Email" 
+                                           type="email" class="form-control" style="min-width:300px" />
+                                </div>
+                            }
+                        </td>
+                    </tr>
+                }
+                
+                @if (Model.Supplier.Contacts.Where(c => c.MobileNumber != null).Any())
+                {
+                    <tr class="d-flex">
+                        <td class="col-3">@_localizer["Address"]</td>
+                        <td class="col-9">
+                            @foreach (var item in Model.Supplier.Contacts.Where(c => c.Address != null))
+                            {
+                                
+                                <div class="d-inline-flex">
+                                    <input asp-for="Contact.Address" value="@item.Address" 
+                                           type="text" class="form-control" style="min-width:300px"  />
+                                </div>
+                            }
+                            
+                        </td>
+                    </tr>
+                }
+                
+            </table>
+        </td>
+        <td class="col-2"></td>
+    </tr>
+</table>
+

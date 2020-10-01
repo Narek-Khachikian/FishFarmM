@@ -75,6 +75,14 @@ namespace FishFarm.Services
         Task<Supplier> GetSupplierByIdAsync(long id);
 
 
+        /// <summary>
+        /// Updates the supplier entity, without modifing
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>returns -5 if nothing changed, otherwise returnes SaveChange result</returns>
+        Task<int> UpdateSupplierAsync(Supplier model);
+
+
         #endregion
 
 

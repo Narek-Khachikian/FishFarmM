@@ -218,6 +218,44 @@ namespace FishFarm.Services
         }
 
 
+        /// <summary>
+        /// Updates the supplier entity, without modifing
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>returns -5 if nothing changed, otherwise returnes SaveChange result</returns>
+        public async Task<int> UpdateSupplierAsync(Supplier model)
+        {
+            Supplier tempModel = await GetSupplierByIdAsync(model.Id);
+            int result = 0;
+            if (tempModel != null)
+            {
+                if (model.IsBatchSupplier != tempModel.IsBatchSupplier
+                    || model.Name != tempModel.Name
+                    || model.Status != tempModel.Status
+                    || model.TINCode != tempModel.TINCode)
+                {
+                    tempModel.IsBatchSupplier = model.IsBatchSupplier;
+                    tempModel.Name = model.Name;
+                    tempModel.Status = model.Status;
+                    tempModel.TINCode = model.TINCode;
+                    tempModel.LastModificationDate = DateTime.UtcNow;
+                    
+                    _dbContext.Suppliers.Update(tempModel);
+                    result = await _dbContext.SaveChangesAsync();
+                }
+                else
+                {
+                    result = -5;
+                }
+            }
+            else
+            {
+                result = -5;
+            }
+            return result;
+        }
+
+
         #endregion
 
 

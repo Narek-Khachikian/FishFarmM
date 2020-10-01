@@ -89,11 +89,46 @@ namespace FishFarmWeb.Controllers
         }
 
 
-        //[HttpPost,AutoValidateAntiforgeryToken]
-        //public async Task<IActionResult> EditSupplier()
-        //{
+        [HttpPost, AutoValidateAntiforgeryToken]
+        public async Task<IActionResult> EditSupplier(SupplierEditViewModel model)
+        {
+            int result = 0;
+            if (ModelState.IsValid)
+            {
+                model.Supplier.LastModifiedByName = User.Identity.Name;
+                result = await _repository.UpdateSupplierAsync(model.Supplier);
+                if (result < 1)
+                {
+                    TempData["SupplierMessage"] = _stringLocalizer["Nothing changed"].ToString();
+                    return RedirectToAction(nameof(Index));
+                }
+                TempData["SupplierMessage"] = _stringLocalizer["Supplier modified successfully"].ToString();
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                model.Supplier.Contacts = (await _repository.GetSupplierByIdAsync(model.Supplier.Id)).Contacts;
+                ViewBag.Title = _stringLocalizer["Edit Supplier"].ToString();
+                return View(model);
+            }
+        }
 
-        //}
+
+
+        public async Task<IActionResult> DetailSupplier(long id)
+        {
+            Supplier sup = await _repository.GetSupplierByIdAsync(id);
+            if(sup != null)
+            {
+                SupplierEditViewModel model = new SupplierEditViewModel()
+                {
+                    Supplier = sup
+                };
+                ViewBag.Title = _stringLocalizer["Detailes Supplier"].ToString();
+                return View(model);
+            }
+            return RedirectToAction(nameof(Index));
+        }
 
     }
 }
