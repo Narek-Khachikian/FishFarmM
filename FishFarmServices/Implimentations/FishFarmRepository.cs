@@ -2,8 +2,10 @@
 using FishFarm.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Internal;
+using Microsoft.EntityFrameworkCore.Storage;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -186,9 +188,77 @@ namespace FishFarm.Services
         #region Suppliers
 
 
-        public async Task<IEnumerable<Supplier>> GetSuppliersAsync()
+        public async Task<IEnumerable<Supplier>> GetSuppliersAsync(SelectionOptions status, SelectionOptions batch,int page = 0, int perPage = 0)
         {
-            return await _dbContext.Suppliers.OrderBy(s=>s.Name).ToListAsync();
+            if (page < 1 || perPage < 1)
+            {
+                switch (status, batch)
+                {
+                    case (SelectionOptions.All, SelectionOptions.All):
+                        return await _dbContext.Suppliers.OrderBy(s => s.Name).ToListAsync();
+                    case (SelectionOptions.Active, SelectionOptions.All):
+                        return await _dbContext.Suppliers.Where(s => s.Status).OrderBy(s => s.Name).ToListAsync();
+                    case (SelectionOptions.Passive, SelectionOptions.All):
+                        return await _dbContext.Suppliers.Where(s => s.Status == false).OrderBy(s => s.Name).ToListAsync();
+                    case (SelectionOptions.All, SelectionOptions.Active):
+                        return await _dbContext.Suppliers.Where(s => s.IsBatchSupplier).OrderBy(s => s.Name).ToListAsync();
+                    case (SelectionOptions.All, SelectionOptions.Passive):
+                        return await _dbContext.Suppliers.Where(s => s.IsBatchSupplier == false).OrderBy(s => s.Name).ToListAsync();
+                    case (SelectionOptions.Active, SelectionOptions.Active):
+                        return await _dbContext.Suppliers.Where(s => s.Status && s.IsBatchSupplier).OrderBy(s => s.Name).ToListAsync();
+                    case (SelectionOptions.Active, SelectionOptions.Passive):
+                        return await _dbContext.Suppliers.Where(s => s.Status && s.IsBatchSupplier == false).OrderBy(s => s.Name).ToListAsync();
+                    default:
+                        return null;
+                }
+            }
+            else
+            {
+                switch (status, batch)
+                {
+                    case (SelectionOptions.All, SelectionOptions.All):
+                        return await _dbContext.Suppliers.OrderBy(s => s.Name).Skip((page-1)*perPage).Take(perPage).ToListAsync();
+                    case (SelectionOptions.Active, SelectionOptions.All):
+                        return await _dbContext.Suppliers.Where(s => s.Status).OrderBy(s => s.Name).Skip((page - 1) * perPage).Take(perPage).ToListAsync();
+                    case (SelectionOptions.Passive, SelectionOptions.All):
+                        return await _dbContext.Suppliers.Where(s => s.Status == false).OrderBy(s => s.Name).Skip((page - 1) * perPage).Take(perPage).ToListAsync();
+                    case (SelectionOptions.All, SelectionOptions.Active):
+                        return await _dbContext.Suppliers.Where(s => s.IsBatchSupplier).OrderBy(s => s.Name).Skip((page - 1) * perPage).Take(perPage).ToListAsync();
+                    case (SelectionOptions.All, SelectionOptions.Passive):
+                        return await _dbContext.Suppliers.Where(s => s.IsBatchSupplier == false).OrderBy(s => s.Name).Skip((page - 1) * perPage).Take(perPage).ToListAsync();
+                    case (SelectionOptions.Active, SelectionOptions.Active):
+                        return await _dbContext.Suppliers.Where(s => s.Status && s.IsBatchSupplier).OrderBy(s => s.Name).Skip((page - 1) * perPage).Take(perPage).ToListAsync();
+                    case (SelectionOptions.Active, SelectionOptions.Passive):
+                        return await _dbContext.Suppliers.Where(s => s.Status && s.IsBatchSupplier == false).OrderBy(s => s.Name).Skip((page - 1) * perPage).Take(perPage).ToListAsync();
+                    default:
+                        return null;
+                }
+            }
+            
+        }
+
+
+        public async Task<int> GetSuppliersCountAsync(SelectionOptions status, SelectionOptions batch)
+        {
+            switch (status, batch)
+            {
+                case (SelectionOptions.All, SelectionOptions.All):
+                    return await _dbContext.Suppliers.CountAsync();
+                case (SelectionOptions.Active, SelectionOptions.All):
+                    return await _dbContext.Suppliers.Where(s => s.Status).CountAsync();
+                case (SelectionOptions.Passive, SelectionOptions.All):
+                    return await _dbContext.Suppliers.Where(s => s.Status == false).CountAsync();
+                case (SelectionOptions.All, SelectionOptions.Active):
+                    return await _dbContext.Suppliers.Where(s => s.IsBatchSupplier).CountAsync();
+                case (SelectionOptions.All, SelectionOptions.Passive):
+                    return await _dbContext.Suppliers.Where(s => s.IsBatchSupplier == false).CountAsync();
+                case (SelectionOptions.Active, SelectionOptions.Active):
+                    return await _dbContext.Suppliers.Where(s => s.Status && s.IsBatchSupplier).CountAsync();
+                case (SelectionOptions.Active, SelectionOptions.Passive):
+                    return await _dbContext.Suppliers.Where(s => s.Status && s.IsBatchSupplier == false).CountAsync();
+                default:
+                    return 0;
+            }
         }
 
 

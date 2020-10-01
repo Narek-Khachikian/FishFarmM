@@ -66,7 +66,9 @@ namespace FishFarm.Services
         #region Supplier
 
 
-        Task<IEnumerable<Supplier>> GetSuppliersAsync();
+        Task<IEnumerable<Supplier>> GetSuppliersAsync(SelectionOptions status, SelectionOptions batch, int page = 0, int perPage = 0);
+
+        Task<int> GetSuppliersCountAsync(SelectionOptions status, SelectionOptions batch);
 
         Task<int> AddSupplierAsync(Supplier model);
 

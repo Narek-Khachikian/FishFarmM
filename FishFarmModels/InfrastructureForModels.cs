@@ -29,4 +29,12 @@ namespace FishFarm.Models
         [Display(Name ="Internal Transportation")]
         InternalTransport
     }
+
+    public enum SelectionOptions
+    {
+        Passive = -1,
+        All,
+        Active,
+        
+    }
 }

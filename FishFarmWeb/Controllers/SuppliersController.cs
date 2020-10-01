@@ -24,11 +24,24 @@ namespace FishFarmWeb.Controllers
         }
 
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(SelectionOptions status = SelectionOptions.All
+            , SelectionOptions batch = SelectionOptions.All
+            , int page = 1
+            , int perPage = Constants.ItemsPerPage)
         {
+            int items = await _repository.GetSuppliersCountAsync(status, batch);
+            if (perPage < 2) { perPage = Constants.ItemsPerPage; }
+            int pages = ((items + perPage - 1)  / perPage);
+            if(page < 1) { page = 1; }
+            if(page > pages) { page = pages; }
             SupplierIndexViewModel model = new SupplierIndexViewModel()
             {
-                Suppliers = await _repository.GetSuppliersAsync()
+                Suppliers = await _repository.GetSuppliersAsync(status, batch, page, perPage),
+                Page = page,
+                Pages = pages,
+                perPage = perPage,
+                Status = status,
+                Batch = batch
             };
             
             ViewBag.Title = _stringLocalizer["Suppliers"].ToString();
