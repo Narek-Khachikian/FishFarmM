@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FishFarm.Models
 {
-    public class MesurmentUnit : BaseModel
+    public class MeasurmentUnit : BaseModel
     {
         public string Name { get; set; }
 

@@ -6,6 +6,6 @@ namespace FishFarm.Models
 {
     public static class Constants
     {
-        public const int ItemsPerPage = 3;
+        public const int ItemsPerPage = 8;
     }
 }

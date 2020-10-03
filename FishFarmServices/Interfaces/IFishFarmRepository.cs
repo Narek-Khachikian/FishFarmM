@@ -105,5 +105,30 @@ namespace FishFarm.Services
 
 
         #endregion
+
+
+        #region Measurment Units
+
+
+        Task<IEnumerable<MeasurmentUnit>> GetAllMeasurmentUnitsAsync();
+
+        Task<bool> MeasurmentUnitExistsAsync(string name);
+
+        Task<int> AddMeasurmentUnitAsync(MeasurmentUnit model);
+
+        Task<MeasurmentUnit> GetMeasurmentUnitAsync(long id);
+
+        /// <summary>
+        /// Updates a Measurment unit
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>returnes -5 if unit is missing, otherwise returns savechange result</returns>
+        Task<int> UpdateMeasurmentUnitAsync(MeasurmentUnit model, bool changeStatus = false);
+
+        Task<int> RemoveMeasurmentUnitAsync(long id);
+
+
+        #endregion
+
     }
 }

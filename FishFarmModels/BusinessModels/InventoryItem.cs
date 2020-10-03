@@ -15,7 +15,7 @@ namespace FishFarm.Models
         public Supplier Supplier { get; set; }
 
         public long MesuringUnitId { get; set; }
-        public MesurmentUnit MesurmentUnit { get; set; }
+        public MeasurmentUnit MeasurmentUnit { get; set; }
 
         public IEnumerable<InventoryIn> InventoryIns { get; set; }
     }

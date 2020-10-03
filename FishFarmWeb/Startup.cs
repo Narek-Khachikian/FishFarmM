@@ -42,12 +42,12 @@ namespace FishFarmWeb
             services.AddLocalization(options => options.ResourcesPath = "Resources");
             services.FishFarmRepository();
             services.SupportedCultures();
-            //services.AddSingleton<SupportedCultures>();
+            
         }
 
         
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,FishFarm.Services.SupportedCultures suportedCultures)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env,SupportedCultures suportedCultures)
         {
             if (env.IsDevelopment())
             {

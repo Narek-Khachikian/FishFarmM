@@ -117,25 +117,13 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="InventoryIns" xml:space="preserve">
-    <value>InventoryIns</value>
+  <data name="Back to Measurment Units" xml:space="preserve">
+    <value>Back to Measurment Units</value>
   </data>
-  <data name="InventoryItems" xml:space="preserve">
-    <value>InventoryItems</value>
+  <data name="Create" xml:space="preserve">
+    <value>Create</value>
   </data>
-  <data name="MeasurmentUnits" xml:space="preserve">
-    <value>MeasurmentUnits</value>
-  </data>
-  <data name="Messages" xml:space="preserve">
-    <value>Messages</value>
-  </data>
-  <data name="Options" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="Sobject" xml:space="preserve">
-    <value>Sobject</value>
-  </data>
-  <data name="Suppliers" xml:space="preserve">
-    <value>Suppliers</value>
+  <data name="Create Measurment Unit" xml:space="preserve">
+    <value>Create Measurment Unit</value>
   </data>
 </root>

@@ -1,0 +1,64 @@
+﻿@inject IViewLocalizer _localizer
+@model IEnumerable<MeasurmentUnit>
+
+<div class="container">
+    <h1>@_localizer["All Units"]</h1>
+</div>
+
+<a asp-controller="MeasurmentUnits" asp-action="CreateMeasurmentUnit" class="btn btn-primary">@_localizer["Create New"]</a>
+@TempData["MeasurmentUnitMessage"]
+<div>
+    <table class="table">
+        <tr class="d-flex">
+            <td class="table- col-2">
+            </td>
+            <td class="col-8">
+                <table class="table table-bordered">
+                    <tr class="d-flex">
+                        <th class="col-1">
+                            @_localizer["Id"]
+                        </th>
+                        <th class="col-3">
+                            @_localizer["Name"]
+                        </th>
+                        <th class="col-4">
+                            @_localizer["Options"]
+                        </th>
+                        <th class="col-4">
+                            @_localizer["Message"]
+                        </th>
+                    </tr>
+
+                    @foreach (MeasurmentUnit item in Model)
+                    {
+                        <tr class="d-flex">
+                            <td class="col-1">
+                                @item.Id
+                            </td>
+                            <td class="col-3">
+                                @item.Name
+                            </td>
+                            <td class="col-4">
+                                @if (item.Status)
+                                {
+                                    <a asp-controller="MeasurmentUnits" asp-action="ChangeStatus" asp-route-id="@item.Id" class="btn btn-warning">Deactivate</a>
+                                }
+                                else
+                                {
+                                    <a asp-controller="MeasurmentUnits" asp-action="ChangeStatus" asp-route-id="@item.Id" class="btn btn-light">Activate</a>
+                                }
+                                <a asp-controller="MeasurmentUnits" asp-action="DeleteMeasurmentUnit" asp-route-id="@item.Id" class="btn btn-danger">@_localizer["Delete"]</a>
+
+                            </td>
+                            <td class="col-4">
+                                <span></span>
+                            </td>
+                        </tr>
+                    }
+                </table>
+            </td>
+            <td class="col-2">
+            </td>
+        </tr>
+    </table>
+</div>

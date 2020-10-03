@@ -20,7 +20,7 @@ namespace FishFarm.Data
             modelBuilder.Entity<Supplier>().Property(nameof(Supplier.Status)).HasDefaultValue(true);
             modelBuilder.Entity<Section>().Property(nameof(Section.Status)).HasDefaultValue(true);
             modelBuilder.Entity<Out>().Property(nameof(Out.Status)).HasDefaultValue(true);
-            modelBuilder.Entity<MesurmentUnit>().Property(nameof(MesurmentUnit.Status)).HasDefaultValue(true);
+            modelBuilder.Entity<MeasurmentUnit>().Property(nameof(MeasurmentUnit.Status)).HasDefaultValue(true);
             modelBuilder.Entity<InventoryItem>().Property(nameof(InventoryItem.Status)).HasDefaultValue(true);
             modelBuilder.Entity<InventoryIn>().Property(nameof(InventoryIn.Status)).HasDefaultValue(true);
             modelBuilder.Entity<In>().Property(nameof(In.Status)).HasDefaultValue(true);
@@ -36,7 +36,7 @@ namespace FishFarm.Data
         public DbSet<Contact> SupplierContacts { get; set; }
         public DbSet<Supplier> Suppliers { get; set; }
         public DbSet<Out> Outs { get; set; }
-        public DbSet<MesurmentUnit> MesurmentUnits { get; set; }
+        public DbSet<MeasurmentUnit> MeasurmentUnits { get; set; }
         public DbSet<InventoryItem> InventoryItems { get; set; }
         public DbSet<InventoryIn> InventoryIns { get; set; }
         public DbSet<InOut> InOuts { get; set; }

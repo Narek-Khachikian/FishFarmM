@@ -438,5 +438,95 @@ namespace FishFarm.Services
 
         #endregion
 
+
+
+        #region Measurment Units
+
+
+        public async Task<IEnumerable<MeasurmentUnit>> GetAllMeasurmentUnitsAsync()
+        {
+            return await _dbContext.MeasurmentUnits.ToListAsync();
+        }
+
+
+        public async Task<bool> MeasurmentUnitExistsAsync(string name)
+        {
+            return await _dbContext.MeasurmentUnits.Where(m => m.Name.ToUpper() == name.Trim().ToUpper()).AnyAsync();
+        }
+
+
+        public async Task<int> AddMeasurmentUnitAsync(MeasurmentUnit model)
+        {
+            int result = 0;
+            model.Name = model.Name.Trim();
+            model.CreationDate = DateTime.UtcNow;
+            model.LastModificationDate = model.CreationDate;
+            await _dbContext.MeasurmentUnits.AddAsync(model);
+            result = await _dbContext.SaveChangesAsync();
+            return result;
+        }
+
+
+        public async Task<MeasurmentUnit> GetMeasurmentUnitAsync(long id)
+        {
+            return await _dbContext.MeasurmentUnits.FindAsync(id);
+        }
+
+
+
+        /// <summary>
+        /// Updates a Measurment unit
+        /// </summary>
+        /// <param name="model"></param>
+        /// <returns>returnes -5 if unit is missing, otherwise returns savechange result</returns>
+        public async Task<int> UpdateMeasurmentUnitAsync(MeasurmentUnit model, bool changeStatus = false)
+        {
+            int result = -5;
+            MeasurmentUnit tempModel = await GetMeasurmentUnitAsync(model.Id);
+            if(tempModel != null)
+            {
+                if (changeStatus)
+                {
+                    tempModel.Name = model.Name.Trim();
+                    tempModel.Status = !model.Status;
+                    tempModel.LastModificationDate = DateTime.UtcNow;
+                    _dbContext.MeasurmentUnits.Update(tempModel);
+                    return await _dbContext.SaveChangesAsync();
+                }
+                else
+                {
+                    if (model.Name.Trim() != tempModel.Name)
+                    {
+                        tempModel.Name = model.Name.Trim();
+                        tempModel.Status = model.Status;
+                        tempModel.LastModificationDate = DateTime.UtcNow;
+                        _dbContext.MeasurmentUnits.Update(tempModel);
+                        return await _dbContext.SaveChangesAsync();
+                    }
+                    else 
+                    { 
+                        result = 0; 
+                    }
+                }
+                
+            }
+            return result;
+        }
+
+
+        public async Task<int> RemoveMeasurmentUnitAsync(long id)
+        {
+            int result = -5;
+            MeasurmentUnit model = await _dbContext.MeasurmentUnits.FindAsync(id);
+            if(model != null)
+            {
+                _dbContext.MeasurmentUnits.Remove(model);
+                return await _dbContext.SaveChangesAsync();
+            }
+            return result;
+        }
+
+        #endregion
+
     }
 }
