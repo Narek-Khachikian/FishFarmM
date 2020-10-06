@@ -1,0 +1,155 @@
+﻿@inject IViewLocalizer _localizer
+@model InventoryItemsIndexViewModel
+
+<div class="container">
+    <h1>@_localizer["Inventory Items"]</h1>
+</div>
+
+<a asp-controller="InventoryItems" asp-action="CreateInventoryItem" class="btn btn-primary">@_localizer["Create New"]</a>
+
+@TempData["InventoryItemsMessage"]
+<div>
+    <table class="table">
+        <tr class="d-flex">
+            <td class="table- col-2">
+            </td>
+            <td class="col-8">
+                <div class="m-1">
+                    <a asp-controller="InventoryItems" asp-action="Index" asp-route-inStock="@SelectionOptions.All" asp-route-isFeed="@SelectionOptions.All"
+                       class="@((Model.InStock == SelectionOptions.All && Model.IsFeed == SelectionOptions.All)?"btn btn-info":"btn btn-light")">@_localizer["All"]</a>
+                    <a asp-controller="InventoryItems" asp-action="Index" asp-route-inStock="@SelectionOptions.All" asp-route-isFeed="@SelectionOptions.Active"
+                       class="@((Model.InStock == SelectionOptions.All && Model.IsFeed == SelectionOptions.Active)?"btn btn-info":"btn btn-light")">@_localizer["All Feed"]</a>
+                    <a asp-controller="InventoryItems" asp-action="Index" asp-route-inStock="@SelectionOptions.Active" asp-route-isFeed="@SelectionOptions.All"
+                       class="@((Model.InStock == SelectionOptions.Active && Model.IsFeed == SelectionOptions.All)?"btn btn-info":"btn btn-light")">@_localizer["In Stock"]</a>
+                    <a asp-controller="InventoryItems" asp-action="Index" asp-route-inStock="@SelectionOptions.Active" asp-route-isFeed="@SelectionOptions.Active"
+                       class="@((Model.InStock == SelectionOptions.Active && Model.IsFeed == SelectionOptions.Active)?"btn btn-info":"btn btn-light")">@_localizer["In Stock Feed"]</a>
+
+                </div>
+                <table class="table table-bordered">
+                    <tr class="d-flex">
+                        <th class="col-1">
+                            @_localizer["Id"]
+                        </th>
+                        <th class="col-3">
+                            @_localizer["Name"]
+                        </th>
+                        <th class="col-2">
+                            @_localizer["Stock"]
+                        </th>
+                        <th class="col-1">
+                            @_localizer["Unit"]
+                        </th>
+                        <th class="col-3">
+                            @_localizer["Options"]
+                        </th>
+                        <th class="col-2">
+                            @_localizer["Message"]
+                        </th>
+                    </tr>
+
+                    @foreach (InventoryItem item in Model.InventoryItems)
+                    {
+                        <tr class="d-flex">
+                            <td class="col-1">
+                                @item.Id
+                            </td>
+                            <td class="col-3">
+                                @item.Name
+                            </td>
+                            <td class="col-2">
+                                @item.Quantity
+                            </td>
+                            <td class="col-1">
+                                @item.MeasurmentUnit.Name
+                            </td>
+                            <td class="col-3">
+                                <a asp-controller="InventoryItems" asp-action="EditInventoryItem" asp-route-id="@item.Id" class="btn btn-warning">@_localizer["Edit"]</a>
+                                <a asp-controller="InventoryItems" asp-action="DeleteInventoryItem" asp-route-id="@item.Id" class="btn btn-danger">@_localizer["Delete"]</a>
+                                <a asp-controller="InventoryItems" asp-action="DetailInventoryItem" asp-route-id="@item.Id" class="btn btn-secondary">@_localizer["Details"]</a>
+                            </td>
+                            <td class="col-2">
+                                <span></span>
+                            </td>
+                        </tr>
+                    }
+                </table>
+                <div class="m-0">
+                    @if (Model.Pages < 6)
+                    {
+                        for (int i = 1; i <= Model.Pages; i++)
+                        {
+                            <a asp-controller="InventoryItems" asp-action="Index"
+                               asp-route-inStock="@Model.InStock" asp-route-isFeed="@Model.IsFeed"
+                               asp-route-page="@i" asp-route-perPage="@Model.PerPage"
+                               class="@(Model.Page==i?"btn btn-outline-dark":"btn btn-light")">@i</a>
+                        }
+                    }
+                    else
+                    {
+                        if (Model.Page < 4)
+                        {
+                            for (int i = 1; i < 4; i++)
+                            {
+                                <a asp-controller="InventoryItems" asp-action="Index"
+                               asp-route-inStock="@Model.InStock" asp-route-isFeed="@Model.IsFeed"
+                               asp-route-page="@i" asp-route-perPage="@Model.PerPage"
+                                   class="@(Model.Page==i?"btn btn-outline-dark":"btn btn-light")">@i</a>
+                            }
+                            <a asp-controller="InventoryItems" asp-action="Index"
+                               asp-route-inStock="@Model.InStock" asp-route-isFeed="@Model.IsFeed"
+                               asp-route-page="@(Model.Page+1)" asp-route-perPage="@Model.PerPage"
+                               class="btn btn-light">>></a>
+                            <a asp-controller="InventoryItems" asp-action="Index"
+                               asp-route-inStock="@Model.InStock" asp-route-isFeed="@Model.IsFeed"
+                               asp-route-page="@(Model.Pages)" asp-route-perPage="@Model.PerPage"
+                               class="btn btn-light">@Model.Pages</a>
+                        }
+                        else if (Model.Page > Model.Pages - 3)
+                        {
+                            <a asp-controller="InventoryItems" asp-action="Index"
+                               asp-route-inStock="@Model.InStock" asp-route-isFeed="@Model.IsFeed"
+                               asp-route-page="1" asp-route-perPage="@Model.PerPage"
+                               class="btn btn-light">1</a>
+                            <a asp-controller="InventoryItems" asp-action="Index"
+                               asp-route-inStock="@Model.InStock" asp-route-isFeed="@Model.IsFeed"
+                               asp-route-page="@(Model.Page-1)" asp-route-perPage="@Model.PerPage"
+                               class="btn btn-light">@("<<")</a>
+                            @for (int k = Model.Pages - 2; k <= Model.Pages; k++)
+                            {
+                                <a asp-controller="InventoryItems" asp-action="Index"
+                                   asp-route-inStock="@Model.InStock" asp-route-isFeed="@Model.IsFeed"
+                                   asp-route-page="@k" asp-route-perPage="@Model.PerPage"
+                                   class="@(Model.Page==k?"btn btn-outline-dark":"btn btn-light")">@k</a>
+                            }
+                        }
+                        else
+                        {
+                            <a asp-controller="InventoryItems" asp-action="Index"
+                               asp-route-inStock="@Model.InStock" asp-route-isFeed="@Model.IsFeed"
+                               asp-route-page="1" asp-route-perPage="@Model.PerPage"
+                               class="btn btn-light">1</a>
+                            <a asp-controller="InventoryItems" asp-action="Index"
+                               asp-route-inStock="@Model.InStock" asp-route-isFeed="@Model.IsFeed"
+                               asp-route-page="@(Model.Page-1)" asp-route-perPage="@Model.PerPage"
+                               class="btn btn-light">@("<<")</a>
+                            <a asp-controller="InventoryItems" asp-action="Index"
+                               asp-route-inStock="@Model.InStock" asp-route-isFeed="@Model.IsFeed"
+                               asp-route-page="@Model.Page" asp-route-perPage="@Model.PerPage"
+                               class="btn btn-outline-dark">@Model.Page</a>
+                            <a asp-controller="InventoryItems" asp-action="Index"
+                               asp-route-inStock="@Model.InStock" asp-route-isFeed="@Model.IsFeed"
+                               asp-route-page="@(Model.Page+1)" asp-route-perPage="@Model.PerPage"
+                               class="btn btn-light">>></a>
+                            <a asp-controller="InventoryItems" asp-action="Index"
+                               asp-route-inStock="@Model.InStock" asp-route-isFeed="@Model.IsFeed"
+                               asp-route-page="@(Model.Pages)" asp-route-perPage="@Model.PerPage"
+                               class="btn btn-light">@Model.Pages</a>
+                        }
+                    }
+                </div>
+            </td>
+            <td class="col-2">
+            </td>
+        </tr>
+    </table>
+</div>

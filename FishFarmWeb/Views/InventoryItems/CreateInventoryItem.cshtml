@@ -1,0 +1,71 @@
+﻿@inject IViewLocalizer _localizer
+@model InventoryItemsCreatViewModel
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="container">
+    <h1>@_localizer["Create Inventory Item"]</h1>
+</div>
+
+
+<table class="table">
+    <tr class="d-flex">
+        <td class="col-2"></td>
+        <td class="col-8">
+            <div class="row">
+                <div class="col-md-4">
+                    <form asp-action="CreateInventoryItem" method="post">
+                        <div asp-validation-summary="All" class="text-danger"></div>
+                        <div class="form-group">
+                            <label asp-for="InventoryItem.Name" class="control-label"></label>
+                            <input asp-for="InventoryItem.Name" class="form-control" />
+                            <span asp-validation-for="InventoryItem.Name" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="InventoryItem.SupplierId" class="control-label"></label>
+                            <select asp-for="InventoryItem.SupplierId" class="form-control">
+                                <option selected hidden value="">@_localizer["-- Select the Supplier --"]</option>
+                                @foreach (Supplier item in Model.Suppliers)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="InventoryItem.SupplierId" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="InventoryItem.MeasurmentUnitId" class="control-label"></label>
+                            <select asp-for="InventoryItem.MeasurmentUnitId" class="form-control">
+                                <option selected hidden value="">@_localizer["-- Select a Unit --"]</option>
+                                @foreach (MeasurmentUnit item in Model.MeasurmentUnits)
+                                {
+                                    <option value="@item.Id">@item.Name</option>
+                                }
+                            </select>
+                            <span asp-validation-for="InventoryItem.MeasurmentUnit" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="InventoryItem.Quantity" class="control-label"></label>
+                            <input type="number" asp-for="InventoryItem.Quantity" class="form-control" />
+                            <span asp-validation-for="InventoryItem.Quantity" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <label asp-for="InventoryItem.IsFeed" class="control-label"></label>
+                            <input type="checkbox" asp-for="InventoryItem.IsFeed" class="form-control" style="resize:both; width:20px" />
+                            <span asp-validation-for="InventoryItem.IsFeed" class="text-danger"></span>
+                        </div>
+                        <div class="form-group">
+                            <input type="submit" value="@_localizer["Create"]" class="btn btn-primary" />
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div>
+                <a asp-action="Index">@_localizer["Back to Inventory"]</a>
+            </div>
+        </td>
+        <td class="col-2"></td>
+    </tr>
+</table>
+

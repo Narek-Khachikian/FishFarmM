@@ -130,5 +130,24 @@ namespace FishFarm.Services
 
         #endregion
 
+
+
+        #region Inventory Items
+
+
+        Task<IEnumerable<InventoryItem>> GetInventoryItemsAsync(SelectionOptions InStock = SelectionOptions.Active, SelectionOptions isFeed = SelectionOptions.All, int page = 0, int perPage = 0);
+
+
+        Task<int> GetInventoryItemsCountAsync(SelectionOptions InStock = SelectionOptions.Active, SelectionOptions isFeed = SelectionOptions.All);
+
+
+        Task<bool> InventoryItemExistsAsync(string name);
+
+
+        Task<int> AddInventoryItemAsync(InventoryItem model);
+
+
+        #endregion
+
     }
 }

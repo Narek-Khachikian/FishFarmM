@@ -288,6 +288,7 @@ namespace FishFarm.Services
         }
 
 
+
         /// <summary>
         /// Updates the supplier entity, without modifing
         /// </summary>
@@ -525,6 +526,112 @@ namespace FishFarm.Services
             }
             return result;
         }
+
+        #endregion
+
+
+
+        #region Inventory Items
+
+
+        public async Task<IEnumerable<InventoryItem>> GetInventoryItemsAsync(SelectionOptions InStock = SelectionOptions.Active, SelectionOptions isFeed = SelectionOptions.All, int page = 0,int perPage = 0)
+        {
+            if(page < 1 || perPage < 1)
+            {
+                switch (InStock,isFeed)
+                {
+                    
+                    case (SelectionOptions.All, SelectionOptions.Active):
+                        return await _dbContext.InventoryItems.Where(i => i.IsFeed == true).Include(i=>i.MeasurmentUnit).OrderBy(i => i.Name).ToListAsync();
+                    case (SelectionOptions.All, SelectionOptions.Passive):
+                        return await _dbContext.InventoryItems.Where(i => i.IsFeed == false).Include(i => i.MeasurmentUnit).OrderBy(i => i.Name).ToListAsync();
+                    case (SelectionOptions.Active, SelectionOptions.All):
+                        return await _dbContext.InventoryItems.Where(i => i.Quantity > 0).Include(i => i.MeasurmentUnit).OrderBy(i => i.Name).ToListAsync();
+                    case (SelectionOptions.Active, SelectionOptions.Active):
+                        return await _dbContext.InventoryItems.Where(i => i.Quantity > 0 && i.IsFeed == true).Include(i => i.MeasurmentUnit).OrderBy(i => i.Name).ToListAsync();
+                    case (SelectionOptions.Active, SelectionOptions.Passive):
+                        return await _dbContext.InventoryItems.Where(i => i.Quantity > 0 && i.IsFeed == false).Include(i => i.MeasurmentUnit).OrderBy(i => i.Name).ToListAsync();
+                    case (SelectionOptions.Passive, SelectionOptions.All):
+                        return await _dbContext.InventoryItems.Where(i => i.Quantity == 0).OrderBy(i => i.Name).Include(i => i.MeasurmentUnit).ToListAsync();
+                    case (SelectionOptions.Passive, SelectionOptions.Active):
+                        return await _dbContext.InventoryItems.Where(i => i.Quantity == 0 && i.IsFeed == true).Include(i => i.MeasurmentUnit).OrderBy(i => i.Name).ToListAsync();
+                    case (SelectionOptions.Passive, SelectionOptions.Passive):
+                        return await _dbContext.InventoryItems.Where(i => i.Quantity == 0 && i.IsFeed == false).Include(i => i.MeasurmentUnit).OrderBy(i => i.Name).ToListAsync();
+                    default:
+                        return await _dbContext.InventoryItems.Include(i => i.MeasurmentUnit).OrderBy(i => i.Name).ToListAsync();
+                }
+            }
+            else
+            {
+                switch (InStock, isFeed)
+                {
+                    
+                    case (SelectionOptions.All, SelectionOptions.Active):
+                        return await _dbContext.InventoryItems.Where(i => i.IsFeed == true).OrderBy(i => i.Name).Skip((page - 1) * perPage).Take(perPage).Include(i => i.MeasurmentUnit).ToListAsync();
+                    case (SelectionOptions.All, SelectionOptions.Passive):
+                        return await _dbContext.InventoryItems.Where(i => i.IsFeed == false).OrderBy(i => i.Name).Skip((page - 1) * perPage).Take(perPage).Include(i => i.MeasurmentUnit).ToListAsync();
+                    case (SelectionOptions.Active, SelectionOptions.All):
+                        return await _dbContext.InventoryItems.Where(i => i.Quantity > 0).OrderBy(i => i.Name).Skip((page - 1) * perPage).Take(perPage).Include(i => i.MeasurmentUnit).ToListAsync();
+                    case (SelectionOptions.Active, SelectionOptions.Active):
+                        return await _dbContext.InventoryItems.Where(i => i.Quantity > 0 && i.IsFeed == true).OrderBy(i => i.Name).Skip((page - 1) * perPage).Take(perPage).Include(i => i.MeasurmentUnit).ToListAsync();
+                    case (SelectionOptions.Active, SelectionOptions.Passive):
+                        return await _dbContext.InventoryItems.Where(i => i.Quantity > 0 && i.IsFeed == false).OrderBy(i => i.Name).Skip((page - 1) * perPage).Take(perPage).Include(i => i.MeasurmentUnit).ToListAsync();
+                    case (SelectionOptions.Passive, SelectionOptions.All):
+                        return await _dbContext.InventoryItems.Where(i => i.Quantity == 0).OrderBy(i => i.Name).Skip((page - 1) * perPage).Take(perPage).Include(i => i.MeasurmentUnit).ToListAsync();
+                    case (SelectionOptions.Passive, SelectionOptions.Active):
+                        return await _dbContext.InventoryItems.Where(i => i.Quantity == 0 && i.IsFeed == true).OrderBy(i => i.Name).Skip((page - 1) * perPage).Take(perPage).Include(i => i.MeasurmentUnit).ToListAsync();
+                    case (SelectionOptions.Passive, SelectionOptions.Passive):
+                        return await _dbContext.InventoryItems.Where(i => i.Quantity == 0 && i.IsFeed == false).OrderBy(i => i.Name).Skip((page - 1) * perPage).Take(perPage).Include(i => i.MeasurmentUnit).ToListAsync();
+                    default:
+                        return await _dbContext.InventoryItems.OrderBy(i => i.Name).Skip((page - 1) * perPage).Take(perPage).Include(i => i.MeasurmentUnit).ToListAsync();
+                }
+            }
+        }
+
+
+        public async Task<int> GetInventoryItemsCountAsync(SelectionOptions InStock = SelectionOptions.Active, SelectionOptions isFeed = SelectionOptions.All)
+        {
+            switch (InStock, isFeed)
+            {
+
+                case (SelectionOptions.All, SelectionOptions.Active):
+                    return await _dbContext.InventoryItems.Where(i => i.IsFeed == true).CountAsync();
+                case (SelectionOptions.All, SelectionOptions.Passive):
+                    return await _dbContext.InventoryItems.Where(i => i.IsFeed == false).CountAsync();
+                case (SelectionOptions.Active, SelectionOptions.All):
+                    return await _dbContext.InventoryItems.Where(i => i.Quantity > 0).CountAsync();
+                case (SelectionOptions.Active, SelectionOptions.Active):
+                    return await _dbContext.InventoryItems.Where(i => i.Quantity > 0 && i.IsFeed == true).CountAsync();
+                case (SelectionOptions.Active, SelectionOptions.Passive):
+                    return await _dbContext.InventoryItems.Where(i => i.Quantity > 0 && i.IsFeed == false).CountAsync();
+                case (SelectionOptions.Passive, SelectionOptions.All):
+                    return await _dbContext.InventoryItems.Where(i => i.Quantity == 0).CountAsync();
+                case (SelectionOptions.Passive, SelectionOptions.Active):
+                    return await _dbContext.InventoryItems.Where(i => i.Quantity == 0 && i.IsFeed == true).CountAsync();
+                case (SelectionOptions.Passive, SelectionOptions.Passive):
+                    return await _dbContext.InventoryItems.Where(i => i.Quantity == 0 && i.IsFeed == false).CountAsync();
+                default:
+                    return await _dbContext.InventoryItems.OrderBy(i => i.Name).CountAsync();
+            }
+        }
+
+
+        public async Task<bool> InventoryItemExistsAsync(string name)
+        {
+            return await _dbContext.InventoryItems.Where(i => i.Name.Trim().ToUpper() == name.Trim().ToUpper()).AnyAsync();
+        }
+
+
+        public async Task<int> AddInventoryItemAsync(InventoryItem model)
+        {
+            model.CreationDate = DateTime.UtcNow;
+            model.LastModificationDate = model.CreationDate;
+            await _dbContext.InventoryItems.AddAsync(model);
+            return await _dbContext.SaveChangesAsync();
+            
+        }
+
+
 
         #endregion
 
