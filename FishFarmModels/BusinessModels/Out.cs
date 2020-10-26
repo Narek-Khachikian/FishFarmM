@@ -16,5 +16,7 @@ namespace FishFarm.Models
         public long TankId { get; set; }
         public Tank Tank { get; set; }
 
+
+
     }
 }
